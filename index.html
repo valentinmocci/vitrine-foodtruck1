@@ -1,0 +1,3337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Marmaille — Food truck au feu de bois · Riaillé & alentours</title>
+<meta name="description" content="La Marmaille, c'est une cuisine de bistrot itinérante au feu de bois, basée à Riaillé. On passe par Châteaubriant, Nort-sur-Erdre, Ancenis et un peu partout autour, avec une ardoise qui change selon les saisons et les producteurs du coin.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cream: #f0e7d6;
+  --cream-dark: #e4d7bc;
+  --paper: #ebe0c9;
+  --ink: #1d1612;
+  --ink-soft: #3a2a20;
+  --ember: #c44d2a;
+  --ember-deep: #8e2e15;
+  --ochre: #c98a3c;
+  --moss: #2f3a25;
+  --moss-deep: #1c2415;
+  --tomato: #a62920;
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.08 0 0 0 0 0.07 0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter', system-ui, sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.55;
+  font-weight:400;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:var(--noise);
+  opacity:.5;
+  pointer-events:none;
+  z-index:1;
+  mix-blend-mode:multiply;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+.serif{font-family:'Fraunces', Georgia, serif;font-optical-sizing:auto}
+.script{font-family:'Caveat', cursive}
+
+/* ========= NAV ========= */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  padding:18px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:#f0e7d6;
+  transition:padding .4s ease;
+  overflow:visible;
+}
+
+.logo-mark,
+.nav-links,
+.burger{
+  mix-blend-mode:difference;
+}
+
+.nav-truck-indicator{
+  mix-blend-mode:normal;
+  isolation:isolate;
+}
+
+nav.scrolled{padding:12px 32px}
+.logo-mark{
+  font-family:'Fraunces', serif;
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-.02em;
+  font-style:italic;
+  display:flex;align-items:baseline;gap:6px;
+}
+.logo-mark .dot{
+  width:7px;height:7px;background:var(--ember);border-radius:50%;
+  display:inline-block;margin-right:2px;
+}
+
+nav .logo-mark{
+  transition:color .28s ease, text-shadow .28s ease;
+}
+nav.nav-logo-dark .logo-mark{
+  color:var(--ink);
+  mix-blend-mode:normal;
+  text-shadow:0 1px 0 rgba(240,231,214,.22);
+}
+nav.nav-logo-dark .logo-mark .dot{
+  background:var(--ember);
+  box-shadow:0 0 14px rgba(196,77,42,.35);
+}
+.nav-links{display:flex;gap:28px;align-items:center;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.nav-links a{position:relative;padding:6px 2px;font-weight:500}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:currentColor;transition:width .35s ease;
+}
+.nav-links a:hover::after{width:100%}
+.burger{
+  display:none;width:38px;height:38px;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+}
+.burger span{display:block;width:22px;height:1.5px;background:currentColor;transition:transform .3s, opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:0;z-index:99;
+  background:var(--moss-deep);
+  color:var(--cream);
+  padding:100px 32px 40px;
+  transform:translateY(-100%);
+  transition:transform .55s cubic-bezier(.7,0,.3,1);
+  display:flex;flex-direction:column;
+}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu a{
+  font-family:'Fraunces',serif;
+  font-size:42px;font-weight:400;font-style:italic;
+  padding:14px 0;border-bottom:1px solid rgba(240,231,214,.12);
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.mobile-menu a span{font-family:'Inter',sans-serif;font-style:normal;font-size:13px;opacity:.5;letter-spacing:.1em}
+.mobile-menu .mm-foot{margin-top:auto;padding-top:30px;font-size:13px;opacity:.7;line-height:1.7}
+
+/* ========= HERO ========= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  padding:120px 32px 60px;
+  background:var(--moss-deep);
+  color:var(--cream);
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto 1fr auto;
+  gap:32px;
+  z-index:2;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--noise);opacity:.6;pointer-events:none;mix-blend-mode:overlay;
+}
+.hero-eyebrow{
+  grid-column:1/2;grid-row:1/2;
+  display:flex;align-items:center;gap:14px;
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  align-self:start;padding-top:10px;
+  opacity:.85;
+}
+.hero-eyebrow .line{width:48px;height:1px;background:var(--ember)}
+.hero-meta{
+  grid-column:2/3;grid-row:1/2;
+  display:flex;justify-content:flex-end;gap:24px;align-items:start;
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.6;
+  padding-top:10px;
+}
+.hero-meta span{display:block}
+.hero h1{
+  grid-column:1/3;grid-row:2/3;
+  font-family:'Fraunces',serif;
+  font-weight:300;
+  font-size:clamp(64px, 14vw, 220px);
+  line-height:.86;
+  letter-spacing:-.045em;
+  align-self:center;
+  position:relative;
+  z-index:2;
+}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--ember)}
+.hero h1 .stamp{
+  display:inline-block;
+  font-size:.18em;
+  font-style:italic;font-weight:600;
+  vertical-align:super;
+  color:var(--cream);
+  background:var(--ember);
+  padding:4px 14px 5px;
+  border-radius:200px;
+  transform:rotate(-4deg);
+  margin-left:.1em;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+.hero-photo{
+  position:absolute;
+  right:-2vw;top:18%;
+  width:38vw;max-width:520px;aspect-ratio:3/4;
+  z-index:1;
+  border-radius:2px;
+  overflow:hidden;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+  transform:rotate(2.5deg);
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+.hero-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(28,36,21,.45));
+}
+.hero-tag{
+  position:absolute;
+  bottom:14%;right:-2vw;
+  background:var(--cream);color:var(--moss-deep);
+  padding:10px 18px;
+  font-family:'Caveat',cursive;
+  font-size:24px;
+  transform:rotate(-3deg);
+  z-index:3;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+.hero-bottom{
+  grid-column:1/3;grid-row:3/4;
+  display:flex;justify-content:space-between;align-items:end;
+  gap:32px;flex-wrap:wrap;
+  position:relative;z-index:2;
+}
+.hero-intro{
+  max-width:380px;
+  font-size:16px;line-height:1.6;
+  opacity:.88;
+}
+.hero-intro::first-letter{
+  font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+  font-size:48px;float:left;line-height:.85;padding:6px 8px 0 0;color:var(--ember);
+}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+  border-radius:200px;
+  transition:transform .3s ease, background .3s ease, color .3s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--ember);color:var(--cream)}
+.btn-primary:hover{background:var(--cream);color:var(--moss-deep);transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(240,231,214,.4);color:var(--cream)}
+.btn-ghost:hover{background:rgba(240,231,214,.08)}
+.btn svg{width:14px;height:14px}
+
+.scroll-cue{
+  position:absolute;bottom:24px;left:32px;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.5;
+  display:flex;align-items:center;gap:10px;
+}
+.scroll-cue::before{content:"";width:36px;height:1px;background:currentColor;animation:scrollLine 2.4s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{transform:scaleX(.3);transform-origin:left}50%{transform:scaleX(1);transform-origin:left}}
+
+/* Marquee */
+.marquee{
+  position:relative;z-index:2;
+  background:var(--ember);color:var(--cream);
+  border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1);
+  overflow:hidden;
+  padding:14px 0;
+}
+.marquee-track{
+  display:flex;gap:48px;
+  animation:marquee 36s linear infinite;
+  white-space:nowrap;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+  font-size:22px;
+}
+.marquee-track span{display:inline-flex;align-items:center;gap:48px}
+.marquee-track .sep{color:rgba(240,231,214,.5);font-style:normal}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ========= HISTOIRE ========= */
+.histoire{
+  position:relative;z-index:2;
+  padding:140px 32px 120px;
+  background:var(--cream);
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:32px;
+  align-items:start;
+}
+.section-tag{
+  font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;
+  display:flex;align-items:center;gap:10px;color:var(--ember-deep);
+}
+.section-tag::before{content:"";width:8px;height:8px;background:var(--ember);border-radius:50%}
+.histoire-tag{grid-column:2/6;}
+.histoire-title{
+  grid-column:2/8;
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(40px,5.4vw,86px);line-height:.95;
+  letter-spacing:-.025em;
+  margin:24px 0 0;
+  color:var(--moss-deep);
+}
+.histoire-title em{font-style:italic;color:var(--ember)}
+.histoire-photo-1{
+  grid-column:8/12;grid-row:1/4;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  transform:translateY(-30px) rotate(-1.5deg);
+  box-shadow:0 24px 60px -20px rgba(28,22,18,.3);
+}
+.histoire-photo-1 img{width:100%;height:100%;object-fit:cover}
+.histoire-photo-1 .cap{
+  position:absolute;
+  bottom:18px;left:18px;
+  background:var(--cream);color:var(--ink);
+  padding:6px 12px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+}
+.histoire-photo-1{position:relative}
+.histoire-text{
+  grid-column:2/7;
+  margin-top:48px;
+  font-size:18px;line-height:1.7;
+  color:var(--ink-soft);
+}
+.histoire-text p+p{margin-top:1em}
+.histoire-text strong{color:var(--ink);font-weight:500;background:linear-gradient(transparent 65%, rgba(196,77,42,.25) 65%)}
+
+.signature{
+  grid-column:2/6;
+  margin-top:32px;
+  display:flex;align-items:center;gap:16px;
+}
+.signature .sig-name{font-family:'Caveat',cursive;font-size:34px;color:var(--moss-deep);line-height:1}
+.signature .sig-role{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+
+.histoire-stats{
+  grid-column:8/13;
+  margin-top:60px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;
+  border-top:1px solid var(--ink);padding-top:24px;
+}
+.stat .num{font-family:'Fraunces',serif;font-weight:300;font-size:54px;line-height:1;color:var(--moss-deep);letter-spacing:-.03em}
+.stat .num em{font-style:italic;color:var(--ember)}
+.stat .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-top:4px;opacity:.65}
+
+/* ========= ARDOISE / CARTE ========= */
+.ardoise{
+  position:relative;z-index:2;
+  background:var(--moss-deep);
+  color:var(--cream);
+  padding:120px 32px 140px;
+  overflow:hidden;
+}
+.ardoise::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 20%, rgba(196,77,42,.18), transparent 50%);
+  pointer-events:none;
+}
+.ardoise-head{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:32px;align-items:end;
+  max-width:1280px;margin:0 auto 70px;
+  position:relative;z-index:2;
+}
+.ardoise-head .section-tag{color:var(--ochre)}
+.ardoise-head .section-tag::before{background:var(--ochre)}
+.ardoise-head h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(48px,7vw,110px);
+  line-height:.92;letter-spacing:-.03em;margin-top:18px;
+}
+.ardoise-head h2 em{font-style:italic;color:var(--ochre)}
+.ardoise-head .head-note{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+  font-size:17px;line-height:1.6;opacity:.8;max-width:380px;
+  text-align:right;align-self:end;
+}
+.ardoise-head .head-note .script{font-size:32px;color:var(--ember);display:block;margin-bottom:6px}
+
+.menu-grid{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:24px;
+  position:relative;z-index:2;
+}
+.dish{
+  position:relative;
+  border-top:1px solid rgba(240,231,214,.18);
+  padding-top:18px;
+  display:flex;flex-direction:column;
+  transition:transform .4s ease;
+}
+.dish:hover{transform:translateY(-4px)}
+.dish-photo{
+  aspect-ratio:5/6;overflow:hidden;margin-bottom:18px;
+  position:relative;
+}
+.dish-photo img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.05) contrast(1.02);
+  transition:transform .9s ease;
+}
+.dish:hover .dish-photo img{transform:scale(1.06)}
+.dish-num{
+  position:absolute;top:10px;left:10px;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:14px;color:var(--cream);
+  background:rgba(28,36,21,.6);
+  padding:3px 9px;border-radius:200px;backdrop-filter:blur(4px);
+}
+.dish-tag{
+  position:absolute;top:10px;right:10px;
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  background:var(--ember);color:var(--cream);
+  padding:4px 9px;border-radius:200px;
+}
+.dish-tag.veg{background:var(--ochre);color:var(--moss-deep)}
+.dish-name{
+  font-family:'Fraunces',serif;font-weight:400;font-size:24px;line-height:1.15;
+  letter-spacing:-.01em;
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+}
+.dish-name .price{
+  font-family:'Inter',sans-serif;font-weight:500;font-size:14px;
+  color:var(--ochre);letter-spacing:.04em;
+  white-space:nowrap;
+}
+.dish-desc{font-size:13px;line-height:1.55;opacity:.72;margin-top:8px}
+
+.dish-1{grid-column:1/5}
+.dish-2{grid-column:5/9;margin-top:60px}
+.dish-3{grid-column:9/13}
+.dish-4{grid-column:1/4;margin-top:30px}
+.dish-5{grid-column:4/8;margin-top:90px}
+.dish-6{grid-column:8/13;margin-top:20px}
+
+.menu-foot{
+  max-width:1280px;margin:90px auto 0;
+  display:flex;justify-content:space-between;align-items:end;
+  gap:32px;flex-wrap:wrap;
+  padding-top:32px;border-top:1px solid rgba(240,231,214,.18);
+  position:relative;z-index:2;
+}
+.menu-foot p{font-family:'Fraunces',serif;font-style:italic;font-size:16px;max-width:480px;line-height:1.55;opacity:.78}
+.menu-foot .price-info{
+  text-align:right;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;
+}
+
+/* ========= PLANNING ========= */
+.planning{
+  position:relative;z-index:2;
+  padding:120px 32px;
+  background:var(--paper);
+}
+.planning-wrap{max-width:1280px;margin:0 auto}
+.planning-head{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:32px;flex-wrap:wrap;margin-bottom:60px;
+}
+.planning-head h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,5.5vw,84px);
+  line-height:.95;letter-spacing:-.025em;color:var(--moss-deep);max-width:8ch;
+}
+.planning-head h2 em{font-style:italic;color:var(--ember)}
+.planning-head .planning-sub{
+  max-width:340px;font-size:15px;line-height:1.6;color:var(--ink-soft);
+  text-align:right;
+}
+
+.calendar{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  border-top:2px solid var(--ink);
+  border-left:2px solid var(--ink);
+  background:var(--ink);gap:1px;
+}
+.day{
+  background:var(--cream);
+  padding:22px 18px 26px;
+  display:flex;flex-direction:column;
+  min-height:240px;
+  position:relative;
+  transition:background .3s ease;
+}
+.day:hover{background:#f5edd9}
+.day.featured{background:var(--moss-deep);color:var(--cream)}
+.day.featured .day-meta{opacity:.6}
+.day.closed{background:var(--cream-dark);color:rgba(29,22,18,.45)}
+.day-name{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:24px;
+  letter-spacing:-.02em;
+}
+.day-meta{font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:2px}
+.day-spot{margin-top:auto;padding-top:18px;border-top:1px solid currentColor;opacity:.95}
+.day.closed .day-spot{border:none}
+.day-spot .where{font-family:'Fraunces',serif;font-weight:600;font-size:17px;line-height:1.15;letter-spacing:-.01em}
+.day-spot .when{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;opacity:.7}
+.day .badge{
+  position:absolute;top:18px;right:14px;
+  font-family:'Caveat',cursive;font-size:18px;color:var(--ember);
+  transform:rotate(8deg);
+}
+.day.featured .badge{color:var(--ochre)}
+
+.planning-foot{
+  margin-top:30px;font-size:13px;line-height:1.6;color:var(--ink-soft);
+  display:flex;gap:32px;flex-wrap:wrap;justify-content:space-between;align-items:center;
+}
+.planning-foot .legend{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.legend-dot{width:12px;height:12px;border-radius:2px}
+.legend-dot.regular{background:var(--cream);border:1px solid var(--ink)}
+.legend-dot.special{background:var(--moss-deep)}
+.legend-dot.off{background:var(--cream-dark)}
+
+/* ========= ÉVÉNEMENTS ========= */
+.events{
+  position:relative;z-index:2;
+  padding:140px 32px;
+  background:var(--cream);
+  overflow:hidden;
+}
+.events-wrap{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.2fr;gap:60px;
+  align-items:center;
+}
+.events-photo{
+  position:relative;
+}
+.events-photo .ph-main{
+  aspect-ratio:4/5;overflow:hidden;
+  box-shadow:0 30px 80px -30px rgba(28,22,18,.4);
+}
+.events-photo .ph-main img{width:100%;height:100%;object-fit:cover}
+.events-photo .ph-mini{
+  position:absolute;bottom:-40px;right:-30px;
+  width:55%;aspect-ratio:1/1;overflow:hidden;
+  border:6px solid var(--cream);
+  transform:rotate(3deg);
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.3);
+}
+.events-photo .ph-mini img{width:100%;height:100%;object-fit:cover}
+.events-photo .stamp{
+  position:absolute;top:-20px;left:-20px;
+  width:120px;height:120px;
+  background:var(--ember);color:var(--cream);
+  border-radius:50%;
+  display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:14px;
+  text-align:center;line-height:1.1;padding:14px;
+  transform:rotate(-12deg);
+  z-index:2;
+  animation:sway 6s ease-in-out infinite;
+}
+@keyframes sway{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(-8deg)}}
+
+.events-text h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,5.5vw,82px);
+  line-height:.92;letter-spacing:-.025em;color:var(--moss-deep);
+  margin:18px 0 28px;
+}
+.events-text h2 em{font-style:italic;color:var(--ember)}
+.events-text p{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:520px}
+
+.event-types{
+  margin-top:40px;
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--ink);
+  border:1px solid var(--ink);
+}
+.event-types li{
+  background:var(--cream);
+  list-style:none;
+  padding:22px 20px;
+  transition:background .3s, color .3s;
+  cursor:default;
+}
+.event-types li:hover{background:var(--moss-deep);color:var(--cream)}
+.event-types .ev-num{
+  font-family:'Fraunces',serif;font-style:italic;font-size:13px;opacity:.55;
+  margin-bottom:6px;display:block;
+}
+.event-types .ev-name{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:-.01em}
+.event-types .ev-desc{font-size:13px;margin-top:6px;line-height:1.5;opacity:.7}
+.event-types li:hover .ev-desc{color:var(--cream);opacity:.85}
+.event-types li:hover .ev-num{color:rgba(240,231,214,.72)}
+.event-types li:hover .ev-name{color:var(--cream)}
+
+/* ========= GALERIE ========= */
+.galerie{
+  position:relative;z-index:2;
+  padding:120px 0 0;background:var(--cream);
+  overflow:hidden;
+}
+.galerie-head{
+  max-width:1280px;margin:0 auto;padding:0 32px 60px;
+  display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;
+}
+.galerie-head h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,5.5vw,82px);
+  line-height:.92;letter-spacing:-.025em;color:var(--moss-deep);
+}
+.galerie-head h2 em{font-style:italic;color:var(--ember)}
+.galerie-head p{font-family:'Fraunces',serif;font-style:italic;font-size:16px;max-width:380px;line-height:1.55;opacity:.7}
+
+.gallery-strip{
+  display:flex;gap:14px;
+  padding:0 32px 32px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.gallery-strip::-webkit-scrollbar{display:none}
+.gallery-strip .gimg{
+  flex:0 0 auto;
+  aspect-ratio:3/4;
+  width:280px;
+  scroll-snap-align:start;
+  overflow:hidden;
+  position:relative;
+}
+.gallery-strip .gimg.tall{aspect-ratio:3/4;width:280px}
+.gallery-strip .gimg.wide{aspect-ratio:4/3;width:380px}
+.gallery-strip .gimg.square{aspect-ratio:1/1;width:320px}
+.gallery-strip .gimg img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease,filter .5s ease}
+.gallery-strip .gimg:hover img{transform:scale(1.04);filter:saturate(1.15)}
+.gallery-strip .gimg::after{
+  content:attr(data-cap);
+  position:absolute;bottom:14px;left:14px;
+  background:var(--cream);color:var(--ink);
+  padding:5px 10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  opacity:0;transform:translateY(6px);transition:.3s;
+}
+.gallery-strip .gimg:hover::after{opacity:1;transform:translateY(0)}
+
+.gallery-meta{
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px;
+  display:flex;justify-content:space-between;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6;
+}
+
+/* ========= AVIS ========= */
+.avis{
+  position:relative;z-index:2;
+  padding:140px 32px;
+  background:var(--ember-deep);
+  color:var(--cream);
+  overflow:hidden;
+}
+.avis::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--noise);opacity:.4;mix-blend-mode:overlay;pointer-events:none;
+}
+.avis-wrap{max-width:1280px;margin:0 auto;position:relative;z-index:2}
+.avis-head{
+  display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;
+  margin-bottom:60px;
+}
+.avis-head h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,5.5vw,80px);
+  line-height:.92;letter-spacing:-.025em;
+}
+.avis-head h2 em{font-style:italic;color:var(--ochre)}
+.avis-rating{text-align:right}
+.avis-rating .stars{font-family:'Fraunces',serif;font-size:32px;letter-spacing:4px;color:var(--ochre)}
+.avis-rating .info{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-top:4px}
+
+.avis-grid{
+  display:grid;grid-template-columns:repeat(12,1fr);gap:24px;
+}
+.avis-card{
+  background:var(--cream);color:var(--ink);
+  padding:30px 28px 26px;
+  border-radius:2px;
+  position:relative;
+  transition:transform .4s;
+}
+.avis-card:hover{transform:translateY(-4px)}
+.avis-card .quote{
+  font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+  font-size:18px;line-height:1.5;letter-spacing:-.005em;
+  color:var(--ink);
+}
+.avis-card .quote::before{
+  content:"";display:block;
+  font-family:'Fraunces',serif;font-weight:600;font-size:64px;color:var(--ember);
+  line-height:.4;margin-bottom:12px;
+}
+.avis-card .quote::before{content:"„"}
+.avis-card .who{
+  margin-top:22px;display:flex;align-items:center;gap:12px;
+  padding-top:16px;border-top:1px solid rgba(29,22,18,.1);
+}
+.avis-card .who .ini{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--moss-deep);color:var(--cream);
+  display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-weight:600;font-size:14px;
+}
+.avis-card .who .nm{font-weight:600;font-size:14px}
+.avis-card .who .lc{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-top:1px}
+.avis-card .stars-mini{
+  position:absolute;top:24px;right:24px;
+  color:var(--ochre);font-size:13px;letter-spacing:1px;
+}
+
+.avis-1{grid-column:1/5;transform:rotate(-.8deg)}
+.avis-2{grid-column:5/10;margin-top:30px;transform:rotate(.5deg)}
+.avis-3{grid-column:10/13;margin-top:-10px;transform:rotate(1.2deg)}
+.avis-4{grid-column:2/7;margin-top:24px;transform:rotate(.8deg)}
+.avis-5{grid-column:7/12;margin-top:50px;transform:rotate(-.6deg)}
+
+/* ========= FAQ ========= */
+.faq{
+  position:relative;z-index:2;
+  padding:140px 32px;
+  background:var(--cream);
+}
+.faq-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px}
+.faq-side{position:sticky;top:100px;align-self:start}
+.faq-side h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(36px,4.5vw,68px);
+  line-height:.95;letter-spacing:-.025em;color:var(--moss-deep);margin-top:18px;
+}
+.faq-side h2 em{font-style:italic;color:var(--ember)}
+.faq-side p{font-size:15px;line-height:1.6;color:var(--ink-soft);margin-top:18px;max-width:280px}
+
+.faq-list{display:flex;flex-direction:column}
+.faq-item{
+  border-top:1px solid var(--ink);
+  padding:26px 0;
+  position:relative;
+}
+.faq-item:last-child{border-bottom:1px solid var(--ink)}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  cursor:pointer;width:100%;text-align:left;
+  font-family:'Fraunces',serif;font-weight:400;font-size:22px;line-height:1.25;letter-spacing:-.01em;
+  color:var(--ink);transition:color .3s;
+}
+.faq-q:hover{color:var(--ember-deep)}
+.faq-q .icn{
+  flex:0 0 auto;width:32px;height:32px;
+  border:1px solid var(--ink);border-radius:50%;
+  display:grid;place-items:center;font-size:18px;
+  transition:transform .4s ease, background .3s, color .3s;
+}
+.faq-item.open .faq-q .icn{transform:rotate(45deg);background:var(--ember);color:var(--cream);border-color:var(--ember)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s cubic-bezier(.7,0,.3,1);
+}
+.faq-a-inner{padding-top:14px;font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:560px}
+
+/* ========= CONTACT ========= */
+.contact{
+  position:relative;z-index:2;
+  padding:140px 32px 60px;
+  background:var(--moss-deep);color:var(--cream);
+  overflow:hidden;
+}
+.contact::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--noise);opacity:.5;mix-blend-mode:overlay;pointer-events:none;
+}
+.contact-wrap{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1.1fr 1.4fr;gap:80px;
+  position:relative;z-index:2;
+}
+.contact-left .section-tag{color:var(--ochre)}
+.contact-left .section-tag::before{background:var(--ochre)}
+.contact-left h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(44px,6vw,92px);
+  line-height:.9;letter-spacing:-.03em;margin:18px 0 30px;
+}
+.contact-left h2 em{font-style:italic;color:var(--ochre)}
+.contact-left p{font-size:16px;line-height:1.65;opacity:.85;max-width:420px}
+
+.contact-cta{
+  margin-top:36px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.contact-cta a{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 22px;
+  background:rgba(240,231,214,.06);
+  border:1px solid rgba(240,231,214,.15);
+  border-radius:6px;
+  transition:background .3s, transform .3s;
+}
+.contact-cta a:hover{background:rgba(240,231,214,.12);transform:translateX(4px)}
+.contact-cta .ico{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;flex:0 0 auto;
+}
+.contact-cta .ico.tel{background:var(--ember)}
+.contact-cta .ico.wa{background:#25d366;color:#fff}
+.contact-cta .ico.mail{background:var(--ochre);color:var(--moss-deep)}
+.contact-cta .ico svg{width:18px;height:18px}
+.contact-cta .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6;display:block}
+.contact-cta .val{font-family:'Fraunces',serif;font-size:20px;font-weight:500;letter-spacing:-.01em;margin-top:2px}
+
+.contact-form{
+  background:var(--cream);color:var(--ink);
+  padding:40px 38px;border-radius:6px;
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.4);
+}
+.contact-form h3{
+  font-family:'Fraunces',serif;font-weight:400;font-size:28px;letter-spacing:-.015em;
+  margin-bottom:8px;
+}
+.contact-form .sub{font-size:13px;opacity:.65;margin-bottom:28px}
+.field{margin-bottom:18px;position:relative}
+.field label{
+  display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:500;margin-bottom:8px;opacity:.7;
+}
+.field label .req{color:var(--ember)}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 14px;
+  background:transparent;
+  border:1px solid rgba(29,22,18,.2);
+  border-radius:3px;
+  font-family:inherit;font-size:15px;color:var(--ink);
+  transition:border-color .25s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--ember);
+}
+.field textarea{min-height:110px;resize:vertical;font-family:inherit}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.btn-submit{
+  background:var(--moss-deep);color:var(--cream);
+  padding:16px 28px;border-radius:200px;
+  font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  width:100%;margin-top:8px;
+  transition:background .3s, transform .3s;
+}
+.btn-submit:hover{background:var(--ember);transform:translateY(-2px)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed}
+.form-msg{margin-top:14px;padding:12px 16px;border-radius:4px;font-size:13px;display:none}
+.form-msg.show{display:block}
+.form-msg.ok{background:#dde6cb;color:var(--moss-deep);border:1px solid var(--moss)}
+.form-msg.err{background:#f4d4cd;color:var(--ember-deep);border:1px solid var(--ember)}
+
+/* ========= FOOTER ========= */
+footer{
+  position:relative;z-index:2;
+  background:var(--moss-deep);color:var(--cream);
+  padding:60px 32px 28px;
+  border-top:1px solid rgba(240,231,214,.1);
+}
+.footer-wrap{max-width:1280px;margin:0 auto}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  padding-bottom:40px;
+}
+.foot-brand .logo-mark{font-size:32px;color:var(--cream)}
+.foot-brand p{margin-top:14px;font-size:13px;line-height:1.6;opacity:.6;max-width:280px}
+.foot-col h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:14px;font-weight:600}
+.foot-col a,.foot-col p{
+  display:block;font-size:13px;line-height:1.8;opacity:.75;
+  transition:opacity .25s, color .25s;
+}
+.foot-col a:hover{opacity:1;color:var(--ember)}
+.footer-bottom{
+  border-top:1px solid rgba(240,231,214,.1);
+  padding-top:24px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;
+}
+
+/* ========= REVEAL ========= */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+
+/* ========= NAV MICRO-INTERACTION · FOOD TRUCK INDICATOR ========= */
+nav{
+  --truck-x:0px;
+  --truck-y:0px;
+  --truck-tilt:0deg;
+  --truck-dir:1;
+  --truck-opacity:0;
+  --truck-scale:1;
+  overflow:visible;
+}
+.nav-links a.is-active::after{width:100%}
+.nav-links a.is-active{color:#fff7e6;text-shadow:0 0 18px rgba(240,231,214,.18)}
+.nav-truck-indicator{
+  position:absolute;
+  left:0;top:50%;
+  width:74px;height:44px;
+  transform:translate3d(var(--truck-x), calc(-50% + 24px + var(--truck-y)), 0) rotate(var(--truck-tilt)) scaleX(var(--truck-dir)) scale(var(--truck-scale));
+  transform-origin:50% 84%;
+  opacity:var(--truck-opacity);
+  pointer-events:none;
+  z-index:3;
+  color:#f0e7d6;
+  filter:drop-shadow(0 12px 18px rgba(0,0,0,.28)) drop-shadow(0 2px 1px rgba(0,0,0,.18));
+  transition:transform .94s cubic-bezier(.18,1,.22,1), opacity .28s ease;
+  will-change:transform, opacity;
+}
+.nav-truck-indicator::before{
+  content:"";
+  position:absolute;
+  left:9px;right:10px;bottom:0;height:7px;
+  border-radius:999px;
+  background:radial-gradient(ellipse at center, rgba(240,231,214,.38), rgba(240,231,214,0) 70%);
+  opacity:.58;
+  filter:blur(2.5px);
+  transform:scaleX(.96);
+}
+.nav-truck-indicator svg{width:100%;height:100%;display:block;overflow:visible}
+.nav-truck-paint{fill:url(#truckPaint)}
+.nav-truck-roof{fill:url(#truckRoof)}
+.nav-truck-cab{fill:url(#truckCab)}
+.nav-truck-awning{fill:var(--ember)}
+.nav-truck-awning-light{fill:#f4d8a5}
+.nav-truck-window{fill:#151d12;stroke:rgba(240,231,214,.55);stroke-width:.8}
+.nav-truck-glass{fill:rgba(240,231,214,.72);opacity:.55}
+.nav-truck-line,.nav-truck-detail{fill:none;stroke:#1c2415;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
+.nav-truck-detail{stroke-width:1;opacity:.55}
+.nav-truck-sign{fill:#f0e7d6;stroke:#1c2415;stroke-width:.9}
+.nav-truck-sign-text{fill:#1c2415;font-family:'Fraunces', Georgia, serif;font-size:7px;font-weight:800;font-style:italic;letter-spacing:-.02em}
+.nav-truck-light{fill:#f7d36d;filter:drop-shadow(0 0 3px rgba(247,211,109,.75))}
+.nav-truck-tail{fill:#c44d2a}
+.nav-truck-bumper{fill:#1c2415;opacity:.82}
+.nav-truck-wheel{transform-box:fill-box;transform-origin:center;fill:#1b1714;stroke:#f0e7d6;stroke-width:1.8}
+.nav-truck-wheel-dot{fill:#f0e7d6}
+.nav-truck-rim{fill:none;stroke:#f0e7d6;stroke-width:.75;opacity:.7;transform-box:fill-box;transform-origin:center}
+.nav-truck-smoke,.nav-truck-spark{fill:#f0e7d6;opacity:0;transform-origin:center}
+.nav-truck-indicator.is-moving{--truck-scale:1.018}
+.nav-truck-indicator.is-moving .nav-truck-wheel,
+.nav-truck-indicator.is-moving .nav-truck-rim{animation:truckWheelSpin .52s linear infinite}
+.nav-truck-indicator.is-moving .nav-truck-smoke{animation:truckSmoke 1.05s ease-out infinite}
+.nav-truck-indicator.is-moving .nav-truck-spark{animation:truckSpark .92s ease-out infinite}
+.nav-truck-indicator.is-settling{transition-timing-function:cubic-bezier(.16,1.22,.32,1)}
+.nav-truck-indicator.is-settling svg{animation:truckSettle .58s cubic-bezier(.2,1,.22,1)}
+@keyframes truckWheelSpin{to{transform:rotate(360deg)}}
+@keyframes truckSmoke{
+  0%{opacity:0;transform:translate(0,0) scale(.42)}
+  28%{opacity:.34}
+  100%{opacity:0;transform:translate(-12px,-8px) scale(1.2)}
+}
+@keyframes truckSpark{
+  0%{opacity:0;transform:translate(0,0) scale(.55)}
+  35%{opacity:.5}
+  100%{opacity:0;transform:translate(-5px,-9px) scale(.12)}
+}
+@keyframes truckSettle{
+  0%{transform:translateY(0) rotate(0)}
+  38%{transform:translateY(1.7px) rotate(-1deg)}
+  70%{transform:translateY(-.8px) rotate(.5deg)}
+  100%{transform:translateY(0) rotate(0)}
+}
+@media (max-width:960px){
+  .nav-truck-indicator{display:none}
+  .mobile-menu a{position:relative;transition:color .35s ease, padding-left .45s cubic-bezier(.19,1,.22,1)}
+  .mobile-menu a.is-active{color:var(--ochre);padding-left:42px}
+  .mobile-menu a.is-active::before{
+    content:"";
+    position:absolute;left:0;top:50%;
+    width:28px;height:18px;
+    transform:translateY(-50%);
+    background:
+      radial-gradient(circle at 7px 15px,#f0e7d6 0 2px,transparent 2.4px),
+      radial-gradient(circle at 21px 15px,#f0e7d6 0 2px,transparent 2.4px),
+      linear-gradient(0deg,var(--ember),var(--ember)) 5px 4px/16px 6px no-repeat,
+      linear-gradient(0deg,#f0e7d6,#f0e7d6) 2px 8px/24px 8px no-repeat;
+    border-radius:4px;
+    filter:drop-shadow(0 5px 9px rgba(0,0,0,.28));
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .nav-truck-indicator{transition:opacity .2s ease, transform .2s ease}
+  .nav-truck-indicator.is-moving .nav-truck-wheel,
+  .nav-truck-indicator.is-moving .nav-truck-rim,
+  .nav-truck-indicator.is-moving .nav-truck-smoke,
+  .nav-truck-indicator.is-moving .nav-truck-spark,
+  .nav-truck-indicator.is-settling svg{animation:none}
+}
+
+
+/* ========= NAV · CONTRASTE AUTOMATIQUE SUR FONDS CLAIRS ========= */
+nav.nav-on-light{
+  color:var(--ink);
+}
+nav.nav-on-light .logo-mark,
+nav.nav-on-light .nav-links,
+nav.nav-on-light .burger{
+  color:var(--ink);
+  mix-blend-mode:normal;
+  text-shadow:0 1px 0 rgba(240,231,214,.28);
+}
+nav.nav-on-light .logo-mark .dot{
+  background:var(--ember);
+  box-shadow:0 0 14px rgba(196,77,42,.35);
+}
+nav.nav-on-light .nav-links a.is-active{
+  color:var(--ink);
+  text-shadow:none;
+}
+nav.nav-on-light .nav-links a::after{
+  background:currentColor;
+}
+nav.nav-on-light .burger span{
+  background:var(--ink);
+}
+nav.nav-on-light .nav-truck-indicator{
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.18)) drop-shadow(0 1px 0 rgba(255,255,255,.4));
+}
+
+
+/* ========= HERO · INDICATION PREMIUM DE POSITION ========= */
+.hero-live-location{
+  position:absolute;
+  top:134px;
+  left:56%;
+  right:auto;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px 10px 10px;
+  border-radius:18px;
+  background:linear-gradient(145deg, rgba(245,239,229,.78), rgba(236,226,210,.54));
+  color:var(--moss-deep);
+  border:1px solid rgba(255,255,255,.32);
+  box-shadow:0 14px 34px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.38);
+  backdrop-filter:blur(16px) saturate(120%);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  overflow:hidden;
+  isolation:isolate;
+  transform:translateX(-8%);
+  animation:heroLocationReveal .95s cubic-bezier(.18,1,.22,1) .45s both, heroLocationFloat 6.8s ease-in-out 1.6s infinite;
+}
+.hero-live-location::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, rgba(255,255,255,.22), rgba(255,255,255,0) 38%, rgba(255,255,255,.1) 52%, rgba(255,255,255,0) 70%);
+  transform:translateX(-120%);
+  opacity:.55;
+  animation:heroLocationSheen 7.2s cubic-bezier(.65,0,.35,1) 1.4s infinite;
+  pointer-events:none;
+}
+.hero-live-location::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  border:1px solid rgba(120,88,58,.12);
+  pointer-events:none;
+}
+.hero-location-pin{
+  position:relative;
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg, rgba(255,248,236,.96), rgba(238,224,198,.9));
+  border:1px solid rgba(142,46,21,.14);
+  box-shadow:0 8px 20px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.55);
+  flex:0 0 auto;
+}
+.hero-location-pin::before,
+.hero-location-pin::after{display:none}
+.hero-location-pin svg{
+  position:relative;
+  z-index:2;
+  width:16px;
+  height:16px;
+  fill:none;
+  stroke:var(--ember-deep);
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:.9;
+}
+.hero-location-text{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.hero-location-kicker{
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:rgba(28,36,21,.46);
+  white-space:nowrap;
+}
+.hero-location-city{
+  position:relative;
+  display:inline-block;
+  width:max-content;
+  font-family:'Fraunces', Georgia, serif;
+  font-size:clamp(19px, 1.55vw, 24px);
+  line-height:1;
+  letter-spacing:-.03em;
+  font-weight:600;
+  font-style:italic;
+  color:#17120f;
+}
+.hero-location-city::after{display:none}
+.hero-location-note{
+  margin-top:1px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:rgba(28,36,21,.42);
+}
+.hero-location-note::before{
+  content:"";
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:linear-gradient(180deg, var(--ochre), var(--ember));
+  box-shadow:0 0 0 0 rgba(196,77,42,.22);
+  animation:heroLocationDot 2.8s ease-in-out infinite;
+}
+@keyframes heroLocationReveal{
+  0%{opacity:0;transform:translateY(-10px) scale(.985);filter:blur(6px)}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+@keyframes heroLocationFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+@keyframes heroLocationSheen{
+  0%,78%,100%{transform:translateX(-120%);opacity:0}
+  18%,36%{transform:translateX(120%);opacity:.5}
+}
+@keyframes heroLocationDot{
+  0%,100%{transform:scale(.92);box-shadow:0 0 0 0 rgba(196,77,42,0)}
+  45%{transform:scale(1.08);box-shadow:0 0 0 6px rgba(196,77,42,.08)}
+}
+@media (max-width:960px){
+  .hero-live-location{
+    position:relative;
+    top:auto;
+    right:auto;
+    grid-column:1;
+    grid-row:3;
+    justify-self:start;
+    width:max-content;
+    max-width:100%;
+    margin:18px 0 0;
+    padding:9px 12px 9px 9px;
+    border-radius:16px;
+  }
+  .hero h1{grid-row:4!important;margin:24px 0 30px!important}
+  .hero-photo{grid-row:5!important}
+  .hero-bottom{grid-row:6!important}
+  .hero-location-pin{width:30px;height:30px;border-radius:10px}
+  .hero-location-pin svg{width:14px;height:14px}
+  .hero-location-city{font-size:clamp(18px, 5.8vw, 24px)}
+}
+@media (max-width:540px){
+  .hero-live-location{gap:10px;align-items:center;padding:8px 11px 8px 8px}
+  .hero-location-kicker{font-size:7px;letter-spacing:.16em}
+  .hero-location-note{font-size:8px;letter-spacing:.09em}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-live-location,.hero-live-location::before,.hero-location-note::before{animation:none!important}
+}
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 960px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .hero{padding:100px 20px 40px;grid-template-columns:1fr;grid-template-rows:auto auto auto auto;min-height:auto}
+  .hero-eyebrow{grid-column:1;grid-row:1}
+  .hero-meta{grid-column:1;grid-row:2;justify-content:flex-start;flex-wrap:wrap;gap:14px}
+  .hero h1{grid-column:1;grid-row:3;font-size:clamp(56px,16vw,110px);margin:30px 0}
+  .hero-photo{position:relative;right:auto;top:auto;width:80%;max-width:none;margin:0 auto;transform:rotate(2deg);grid-column:1;grid-row:4}
+  .hero-tag{right:6%;bottom:8%}
+  .hero-bottom{grid-column:1;grid-row:5;flex-direction:column;align-items:start;margin-top:30px}
+  .scroll-cue{display:none}
+  .marquee-track{font-size:18px;gap:32px}
+  .histoire{padding:90px 20px}
+  .histoire-tag,.histoire-title,.histoire-text,.signature{grid-column:1/13}
+  .histoire-photo-1{grid-column:1/13;grid-row:auto;transform:rotate(-1deg);max-width:520px;margin:30px auto 0}
+  .histoire-stats{grid-column:1/13;margin-top:40px}
+  .ardoise{padding:90px 20px}
+  .ardoise-head{grid-template-columns:1fr;margin-bottom:48px}
+  .ardoise-head .head-note{text-align:left;max-width:none}
+  .menu-grid{gap:30px}
+  .dish-1,.dish-2,.dish-3,.dish-4,.dish-5,.dish-6{grid-column:1/13;margin-top:0}
+  @media (min-width:540px){
+    .dish-1,.dish-2{grid-column:span 6}.dish-3,.dish-4{grid-column:span 6;margin-top:0}.dish-5,.dish-6{grid-column:span 6;margin-top:0}
+  }
+  .planning{padding:90px 20px}
+  .planning-head{flex-direction:column;align-items:start}
+  .planning-head .planning-sub{text-align:left}
+  .calendar{grid-template-columns:1fr 1fr}
+  .day{min-height:170px}
+  .events{padding:90px 20px}
+  .events-wrap{grid-template-columns:1fr;gap:80px}
+  .events-photo .ph-mini{right:0}
+  .event-types{grid-template-columns:1fr}
+  .galerie-head{flex-direction:column;align-items:start}
+  .gallery-strip{padding:0 20px 20px}
+  .gallery-strip .gimg.tall{width:240px}
+  .gallery-strip .gimg.wide{width:300px}
+  .gallery-strip .gimg.square{width:260px}
+  .avis{padding:90px 20px}
+  .avis-grid{grid-template-columns:1fr}
+  .avis-1,.avis-2,.avis-3,.avis-4,.avis-5{grid-column:1;transform:none;margin-top:0}
+  .faq{padding:90px 20px}
+  .faq-wrap{grid-template-columns:1fr;gap:40px}
+  .faq-side{position:relative;top:0}
+  .faq-q{font-size:18px}
+  .contact{padding:90px 20px 50px}
+  .contact-wrap{grid-template-columns:1fr;gap:50px}
+  .contact-form{padding:30px 24px}
+  .field-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media (max-width:540px){
+  .calendar{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .hero h1 .stamp{font-size:.14em}
+  .events-photo .stamp{width:90px;height:90px;font-size:11px;top:-10px;left:-10px}
+  .histoire-stats{grid-template-columns:1fr 1fr}
+  .stat .num{font-size:42px}
+}
+
+
+/* ========= PAGE DE CHARGEMENT · FOOD TRUCK PREMIUM ========= */
+body.is-loading{overflow:hidden;touch-action:none}
+.site-loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  min-height:100svh;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(201,138,60,.22), transparent 28%),
+    radial-gradient(circle at 78% 10%, rgba(196,77,42,.22), transparent 31%),
+    radial-gradient(circle at 50% 110%, rgba(142,46,21,.42), transparent 46%),
+    linear-gradient(135deg, #1c2415 0%, #24170f 46%, #0f140d 100%);
+  color:var(--cream);
+  overflow:hidden;
+  isolation:isolate;
+  transition:opacity .85s cubic-bezier(.65,0,.35,1), visibility .85s cubic-bezier(.65,0,.35,1), transform .85s cubic-bezier(.65,0,.35,1);
+}
+.site-loader[aria-hidden="true"]{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:scale(1.018);
+}
+.site-loader::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background-image:var(--noise);
+  opacity:.48;
+  mix-blend-mode:overlay;
+  pointer-events:none;
+}
+.site-loader::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, transparent, rgba(240,231,214,.08), transparent) -40vw 0 / 38vw 100% no-repeat,
+    radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.38) 100%);
+  animation:loaderLightSweep 3.8s ease-in-out infinite;
+  pointer-events:none;
+}
+.loader-stage{
+  position:relative;
+  z-index:2;
+  width:min(92vw, 760px);
+  min-height:min(74svh, 620px);
+  display:grid;
+  place-items:center;
+  padding:clamp(22px, 4vw, 46px);
+}
+.loader-card{
+  position:relative;
+  width:100%;
+  padding:clamp(26px, 5vw, 54px);
+  border:1px solid rgba(240,231,214,.16);
+  border-radius:32px;
+  background:linear-gradient(145deg, rgba(240,231,214,.1), rgba(240,231,214,.035));
+  box-shadow:0 38px 120px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.1);
+  backdrop-filter:blur(20px);
+  overflow:hidden;
+}
+.loader-card::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:31px;
+  background:radial-gradient(circle at 50% 0%, rgba(240,231,214,.14), transparent 44%);
+  pointer-events:none;
+}
+.loader-badge{
+  width:max-content;
+  margin:0 auto 22px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(240,231,214,.1);
+  border:1px solid rgba(240,231,214,.14);
+  color:#f8ead0;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.loader-badge::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--ember);
+  box-shadow:0 0 18px rgba(196,77,42,.9);
+  animation:loaderPulse 1.6s ease-in-out infinite;
+}
+.loader-title{
+  position:relative;
+  z-index:2;
+  font-family:'Fraunces', Georgia, serif;
+  font-size:clamp(42px, 8vw, 92px);
+  font-weight:300;
+  line-height:.92;
+  letter-spacing:-.045em;
+  text-align:center;
+}
+.loader-title em{font-style:italic;color:var(--ochre)}
+.loader-subtitle{
+  margin:18px auto 0;
+  max-width:430px;
+  text-align:center;
+  color:rgba(240,231,214,.78);
+  font-size:clamp(14px, 2vw, 16px);
+  line-height:1.65;
+}
+.loader-visual{
+  position:relative;
+  height:clamp(172px, 30vw, 250px);
+  margin:clamp(24px, 4vw, 40px) auto 28px;
+  overflow:visible;
+}
+.loader-road{
+  position:absolute;
+  left:50%;
+  bottom:30px;
+  width:min(620px, 82vw);
+  height:76px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.44), transparent 70%);
+  filter:blur(1px);
+  opacity:.7;
+}
+.loader-road::before{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:8%;
+  top:34px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(240,231,214,.28), transparent);
+}
+.loader-flame{
+  position:absolute;
+  left:50%;
+  bottom:76px;
+  width:62px;
+  height:76px;
+  transform:translateX(-50%);
+  filter:drop-shadow(0 0 22px rgba(196,77,42,.45));
+  opacity:.92;
+}
+.loader-flame::before,
+.loader-flame::after{
+  content:"";
+  position:absolute;
+  inset:auto 9px 0;
+  height:64px;
+  border-radius:48px 48px 48px 12px;
+  background:linear-gradient(180deg, #ffd87a 0%, #e86a31 46%, #8e2e15 100%);
+  transform:rotate(45deg) scaleY(1);
+  animation:loaderFlame 1.35s ease-in-out infinite;
+}
+.loader-flame::after{
+  inset:auto 21px 4px;
+  height:42px;
+  background:linear-gradient(180deg, #fff1b8 0%, #f2a041 68%, #c44d2a 100%);
+  animation-delay:-.35s;
+}
+.loader-truck{
+  position:absolute;
+  left:50%;
+  bottom:32px;
+  width:clamp(230px, 45vw, 358px);
+  transform:translateX(-50%);
+  transform-origin:50% 90%;
+  animation:loaderTruckArrive 2.9s cubic-bezier(.18,1,.22,1) both, loaderTruckIdle 1.25s ease-in-out 2.9s infinite;
+  filter:drop-shadow(0 24px 24px rgba(0,0,0,.34));
+}
+.loader-truck svg{width:100%;height:auto;overflow:visible;display:block}
+.loader-truck .body{fill:url(#loaderTruckBody)}
+.loader-truck .roof{fill:url(#loaderTruckRoof)}
+.loader-truck .cab{fill:#ead7b8}
+.loader-truck .awning-red{fill:var(--ember)}
+.loader-truck .awning-cream{fill:#f7dfb2}
+.loader-truck .window{fill:#151d12;stroke:rgba(240,231,214,.7);stroke-width:1.4}
+.loader-truck .line{fill:none;stroke:#1c2415;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
+.loader-truck .sign{fill:#fff1d5;stroke:#1c2415;stroke-width:1.25}
+.loader-truck .sign-text{fill:#1c2415;font-family:'Fraunces', Georgia, serif;font-size:14px;font-weight:800;font-style:italic;letter-spacing:-.03em}
+.loader-truck .lamp{fill:#ffd873;filter:drop-shadow(0 0 8px rgba(255,216,115,.9))}
+.loader-truck .tail{fill:#c44d2a}
+.loader-truck .wheel{fill:#16120f;stroke:#f0e7d6;stroke-width:3.1;transform-box:fill-box;transform-origin:center;animation:loaderWheelSpin .48s linear infinite}
+.loader-truck .rim{fill:none;stroke:#f0e7d6;stroke-width:1.4;opacity:.72;transform-box:fill-box;transform-origin:center;animation:loaderWheelSpin .48s linear infinite}
+.loader-truck .hub{fill:#f0e7d6}
+.loader-steam{
+  position:absolute;
+  left:50%;
+  bottom:150px;
+  width:min(430px, 76vw);
+  height:112px;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+.loader-steam span{
+  position:absolute;
+  bottom:0;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(240,231,214,.38), rgba(240,231,214,0) 70%);
+  filter:blur(.4px);
+  opacity:0;
+  animation:loaderSteam 2.6s ease-out infinite;
+}
+.loader-steam span:nth-child(1){left:23%;animation-delay:0s}
+.loader-steam span:nth-child(2){left:37%;animation-delay:.42s;width:18px;height:18px}
+.loader-steam span:nth-child(3){left:54%;animation-delay:.2s;width:30px;height:30px}
+.loader-steam span:nth-child(4){left:66%;animation-delay:.75s;width:20px;height:20px}
+.loader-progress-wrap{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:16px;
+  margin:0 auto;
+  max-width:520px;
+}
+.loader-progress{
+  position:relative;
+  height:10px;
+  border-radius:999px;
+  background:rgba(240,231,214,.12);
+  overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.22);
+}
+.loader-progress span{
+  display:block;
+  width:0%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, var(--ember-deep), var(--ember), var(--ochre), #f6d27f);
+  box-shadow:0 0 22px rgba(196,77,42,.45);
+  transition:width .08s linear;
+  will-change:width;
+}
+.loader-percent{
+  min-width:45px;
+  font-size:12px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(240,231,214,.72);
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.loader-status{
+  margin-top:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  color:rgba(240,231,214,.68);
+  font-family:'Caveat', cursive;
+  font-size:clamp(22px, 4vw, 31px);
+}
+.loader-status::before,
+.loader-status::after{
+  content:"";
+  width:34px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(240,231,214,.45));
+}
+.loader-status::after{background:linear-gradient(90deg, rgba(240,231,214,.45), transparent)}
+.loader-sparks{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.loader-sparks span{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#ffd873;
+  box-shadow:0 0 16px rgba(255,216,115,.8);
+  opacity:0;
+  animation:loaderSpark 2.2s ease-out infinite;
+}
+.loader-sparks span:nth-child(1){left:15%;top:45%;animation-delay:.2s}
+.loader-sparks span:nth-child(2){left:78%;top:36%;animation-delay:.8s}
+.loader-sparks span:nth-child(3){left:67%;top:67%;animation-delay:1.25s}
+.loader-sparks span:nth-child(4){left:25%;top:28%;animation-delay:1.6s}
+@keyframes loaderTruckArrive{
+  0%{transform:translateX(-145vw) rotate(-2deg);opacity:0}
+  72%{transform:translateX(-48%) rotate(1.5deg);opacity:1}
+  100%{transform:translateX(-50%) rotate(0deg);opacity:1}
+}
+@keyframes loaderTruckIdle{
+  0%,100%{transform:translateX(-50%) translateY(0) rotate(0deg)}
+  50%{transform:translateX(-50%) translateY(-2px) rotate(.35deg)}
+}
+@keyframes loaderWheelSpin{to{transform:rotate(360deg)}}
+@keyframes loaderSteam{
+  0%{opacity:0;transform:translateY(0) translateX(0) scale(.55)}
+  28%{opacity:.55}
+  100%{opacity:0;transform:translateY(-92px) translateX(28px) scale(1.75)}
+}
+@keyframes loaderFlame{
+  0%,100%{transform:rotate(45deg) scaleY(.88) scaleX(.92)}
+  50%{transform:rotate(45deg) scaleY(1.08) scaleX(1)}
+}
+@keyframes loaderPulse{
+  0%,100%{transform:scale(.75);opacity:.65}
+  50%{transform:scale(1.15);opacity:1}
+}
+@keyframes loaderSpark{
+  0%{opacity:0;transform:translateY(0) scale(.5)}
+  28%{opacity:.75}
+  100%{opacity:0;transform:translateY(-60px) translateX(18px) scale(.15)}
+}
+@keyframes loaderLightSweep{
+  0%,18%{background-position:-45vw 0, 0 0}
+  62%,100%{background-position:125vw 0, 0 0}
+}
+@media (max-width:720px){
+  .loader-stage{min-height:100svh;padding:18px}
+  .loader-card{border-radius:24px;padding:26px 18px}
+  .loader-card::before{border-radius:23px}
+  .loader-badge{font-size:9px;letter-spacing:.14em;margin-bottom:18px}
+  .loader-visual{height:220px;margin-top:22px}
+  .loader-flame{bottom:74px;transform:translateX(-50%) scale(.82)}
+  .loader-steam{bottom:136px}
+  .loader-progress-wrap{grid-template-columns:1fr;gap:8px}
+  .loader-percent{text-align:center;min-width:0}
+  .loader-status{font-size:23px;line-height:1.1}
+}
+@media (prefers-reduced-motion:reduce){
+  .site-loader,.site-loader::after,.loader-badge::before,.loader-truck,.loader-truck .wheel,.loader-truck .rim,.loader-steam span,.loader-flame::before,.loader-flame::after,.loader-sparks span{
+    animation:none!important;
+    transition:none!important;
+  }
+  .loader-truck{transform:translateX(-50%);opacity:1}
+}
+
+
+/* ========= PAGE DE CHARGEMENT · VERSION EXPERT 3S+ ========= */
+.site-loader{
+  background:
+    radial-gradient(circle at 12% 15%, rgba(255,216,115,.13), transparent 18%),
+    radial-gradient(circle at 83% 14%, rgba(196,77,42,.20), transparent 26%),
+    radial-gradient(circle at 50% 93%, rgba(201,138,60,.20), transparent 31%),
+    linear-gradient(145deg, #141a10 0%, #24140d 49%, #080b07 100%);
+}
+.site-loader.is-ready .loader-card{transform:translateY(-3px) scale(1.006)}
+.site-loader.is-ready .loader-truck{animation:loaderTruckReady .72s cubic-bezier(.2,1,.22,1) both}
+.loader-stage::before,
+.loader-stage::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  filter:blur(26px);
+  opacity:.42;
+  animation:loaderAmbientFloat 7s ease-in-out infinite;
+}
+.loader-stage::before{width:220px;height:220px;left:-60px;top:8%;background:rgba(196,77,42,.28)}
+.loader-stage::after{width:260px;height:260px;right:-70px;bottom:4%;background:rgba(201,138,60,.22);animation-delay:-2.4s}
+.loader-card{
+  transform:translateZ(0);
+  transition:transform .85s cubic-bezier(.19,1,.22,1);
+  box-shadow:
+    0 45px 140px rgba(0,0,0,.48),
+    0 1px 0 rgba(255,255,255,.14) inset,
+    0 -1px 0 rgba(0,0,0,.18) inset;
+}
+.loader-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:
+    linear-gradient(115deg, transparent 0 31%, rgba(255,255,255,.10) 42%, transparent 53% 100%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 42px);
+  background-position:-160% 0, 0 0;
+  animation:loaderGlassSweep 4.6s cubic-bezier(.65,0,.35,1) infinite;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+.loader-badge{box-shadow:0 10px 34px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.13)}
+.loader-title{text-shadow:0 16px 46px rgba(0,0,0,.32)}
+.loader-subtitle{letter-spacing:.005em}
+.loader-visual{perspective:900px;isolation:isolate}
+.loader-market-lights{
+  position:absolute;
+  left:50%;top:4px;
+  width:min(520px,82vw);
+  height:62px;
+  transform:translateX(-50%);
+  border-top:1px solid rgba(240,231,214,.13);
+  opacity:.9;
+}
+.loader-market-lights::before,
+.loader-market-lights::after{
+  content:"";position:absolute;top:-1px;width:22%;height:1px;background:linear-gradient(90deg, transparent, rgba(240,231,214,.35), transparent)
+}
+.loader-market-lights::before{left:8%;transform:rotate(-4deg);transform-origin:right}
+.loader-market-lights::after{right:8%;transform:rotate(4deg);transform-origin:left}
+.loader-market-lights i{
+  position:absolute;top:10px;width:10px;height:10px;border-radius:50%;
+  background:#f6d27f;box-shadow:0 0 18px rgba(246,210,127,.75),0 12px 28px rgba(196,77,42,.18);
+  animation:loaderBulb 2.8s ease-in-out infinite;
+}
+.loader-market-lights i:nth-child(1){left:16%;animation-delay:.1s}.loader-market-lights i:nth-child(2){left:33%;animation-delay:.45s}.loader-market-lights i:nth-child(3){left:50%;animation-delay:.18s}.loader-market-lights i:nth-child(4){left:67%;animation-delay:.62s}.loader-market-lights i:nth-child(5){left:84%;animation-delay:.3s}
+.loader-road{
+  height:98px;
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,.54), transparent 71%),
+    linear-gradient(90deg, transparent, rgba(240,231,214,.05), transparent);
+}
+.loader-road::after{
+  content:"";
+  position:absolute;
+  left:12%;right:12%;top:43px;height:8px;
+  background:repeating-linear-gradient(90deg, rgba(240,231,214,.42) 0 44px, transparent 44px 84px);
+  transform:perspective(260px) rotateX(63deg);
+  opacity:.42;
+  filter:blur(.2px);
+  animation:loaderRoadMove .82s linear infinite;
+}
+.loader-grill{
+  position:absolute;
+  left:50%;bottom:61px;
+  width:160px;height:58px;
+  transform:translateX(-50%) perspective(420px) rotateX(58deg);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(20,13,8,.88), rgba(5,5,4,.62));
+  box-shadow:0 12px 36px rgba(0,0,0,.36), inset 0 0 0 1px rgba(240,231,214,.12);
+  overflow:hidden;
+  opacity:.86;
+}
+.loader-grill::before{
+  content:"";position:absolute;inset:11px 16px;
+  background:repeating-linear-gradient(90deg, rgba(240,231,214,.24) 0 2px, transparent 2px 20px);
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.45));
+}
+.loader-grill::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 70%, rgba(232,106,49,.38), transparent 58%);
+  animation:loaderEmbers 1.25s ease-in-out infinite;
+}
+.loader-grill span{
+  position:absolute;bottom:8px;width:5px;height:5px;border-radius:50%;background:#ffd873;box-shadow:0 0 13px rgba(255,216,115,.85);opacity:.6;animation:loaderCoal .9s ease-in-out infinite;
+}
+.loader-grill span:nth-child(1){left:20%;animation-delay:.1s}.loader-grill span:nth-child(2){left:42%;animation-delay:.32s}.loader-grill span:nth-child(3){left:62%;animation-delay:.03s}.loader-grill span:nth-child(4){left:78%;animation-delay:.52s}
+.loader-headlight{
+  position:absolute;
+  left:calc(50% + clamp(90px,18vw,143px));
+  bottom:72px;
+  width:190px;height:52px;
+  transform:skewX(-12deg);
+  background:linear-gradient(90deg, rgba(255,216,115,.34), transparent 82%);
+  filter:blur(8px);
+  opacity:.55;
+  mix-blend-mode:screen;
+  animation:loaderHeadlight 2.9s ease-in-out infinite;
+}
+.loader-exhaust{
+  position:absolute;
+  left:calc(50% - clamp(122px,22vw,185px));
+  bottom:82px;
+  width:120px;height:74px;
+  pointer-events:none;
+}
+.loader-exhaust span{
+  position:absolute;right:0;bottom:0;border-radius:50%;
+  width:18px;height:18px;background:radial-gradient(circle, rgba(240,231,214,.25), rgba(240,231,214,0) 70%);
+  filter:blur(.6px);opacity:0;animation:loaderExhaust 1.6s ease-out infinite;
+}
+.loader-exhaust span:nth-child(2){animation-delay:.32s;width:24px;height:24px}.loader-exhaust span:nth-child(3){animation-delay:.72s;width:14px;height:14px}
+.loader-steam{height:136px;bottom:146px}
+.loader-steam span{filter:blur(.8px);background:radial-gradient(circle, rgba(255,244,224,.42), rgba(240,231,214,.12) 45%, rgba(240,231,214,0) 72%)}
+.loader-steam span:nth-child(5){left:46%;animation-delay:1.04s;width:16px;height:16px}.loader-steam span:nth-child(6){left:73%;animation-delay:1.18s;width:26px;height:26px}
+.loader-truck{filter:drop-shadow(0 30px 28px rgba(0,0,0,.43)) drop-shadow(0 2px 0 rgba(255,255,255,.08))}
+.loader-truck svg{transform:translateZ(0)}
+.loader-truck .body{filter:drop-shadow(0 1px 0 rgba(255,255,255,.25))}
+.loader-truck .window{filter:drop-shadow(0 0 7px rgba(240,231,214,.18))}
+.loader-progress{height:12px;background:rgba(240,231,214,.10);border:1px solid rgba(240,231,214,.10)}
+.loader-progress span{background:linear-gradient(90deg,#8e2e15 0%,#c44d2a 36%,#e8913e 69%,#f7dc91 100%);position:relative;overflow:hidden}
+.loader-progress span::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent);
+  transform:translateX(-100%);animation:loaderProgressShine 1.35s ease-in-out infinite;
+}
+.loader-status{color:rgba(248,234,208,.82);text-shadow:0 10px 28px rgba(0,0,0,.22)}
+@keyframes loaderTruckReady{
+  0%{transform:translateX(-50%) translateY(0) rotate(0)}
+  35%{transform:translateX(-50%) translateY(-4px) rotate(.8deg)}
+  100%{transform:translateX(-50%) translateY(0) rotate(0)}
+}
+@keyframes loaderAmbientFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-12px,0) scale(1.05)}}
+@keyframes loaderGlassSweep{0%,42%{background-position:-180% 0,0 0}78%,100%{background-position:180% 0,0 0}}
+@keyframes loaderBulb{0%,100%{opacity:.48;transform:translateY(0) scale(.9)}48%{opacity:1;transform:translateY(1px) scale(1.12)}}
+@keyframes loaderRoadMove{to{background-position:-84px 0}}
+@keyframes loaderEmbers{0%,100%{opacity:.54}50%{opacity:.92}}
+@keyframes loaderCoal{0%,100%{transform:scale(.75);opacity:.38}50%{transform:scale(1.25);opacity:1}}
+@keyframes loaderHeadlight{0%,100%{opacity:.38;transform:skewX(-12deg) translateX(0)}50%{opacity:.68;transform:skewX(-12deg) translateX(8px)}}
+@keyframes loaderExhaust{0%{opacity:0;transform:translate(0,0) scale(.4)}25%{opacity:.36}100%{opacity:0;transform:translate(-70px,-34px) scale(1.9)}}
+@keyframes loaderProgressShine{0%{transform:translateX(-110%)}100%{transform:translateX(110%)}}
+@media (max-width:720px){
+  .loader-market-lights{top:0;width:86vw}.loader-grill{width:132px;height:48px;bottom:58px}.loader-headlight{display:none}.loader-exhaust{left:calc(50% - 145px);bottom:82px}.loader-steam{bottom:132px}.loader-title{font-size:clamp(38px,13vw,64px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .loader-stage::before,.loader-stage::after,.loader-card::after,.loader-market-lights i,.loader-road::after,.loader-grill::after,.loader-grill span,.loader-headlight,.loader-exhaust span,.loader-progress span::after,.loader-city-highlight,.loader-city-highlight::before,.loader-city-highlight::after{animation:none!important}
+}
+
+
+/* Ajustement demandé : camion du loader moins long et plus haut */
+.loader-truck{
+  width:clamp(206px, 37vw, 304px);
+  bottom:20px;
+}
+.loader-truck svg{
+  aspect-ratio:200/160;
+  transform:scaleX(.9) scaleY(1.14);
+  transform-origin:50% 100%;
+}
+.loader-steam{bottom:174px}
+.loader-exhaust{left:calc(50% - clamp(94px,17vw,144px));bottom:100px}
+.loader-headlight{left:calc(50% + clamp(66px,13vw,108px));bottom:90px}
+@media (max-width:720px){
+  .loader-truck{width:clamp(206px, 70vw, 278px);bottom:20px}
+  .loader-truck svg{transform:scaleX(.91) scaleY(1.12)}
+  .loader-steam{bottom:160px}
+  .loader-exhaust{left:calc(50% - 112px);bottom:98px}
+  .loader-headlight{left:calc(50% + 76px);bottom:88px}
+}
+
+
+/* Ajustement demandé : retrait du brasero central + planning ville du loader */
+.loader-grill,
+.loader-flame{display:none!important}
+.loader-today{
+  position:relative;
+  z-index:3;
+  width:max-content;
+  max-width:92%;
+  margin:22px auto -10px;
+  padding:10px 16px 11px;
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(240,231,214,.16), rgba(240,231,214,.07));
+  border:1px solid rgba(240,231,214,.18);
+  box-shadow:0 16px 44px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter:blur(16px);
+  color:#fff1d5;
+  font-size:clamp(13px, 2vw, 15px);
+  line-height:1.35;
+  text-align:center;
+  letter-spacing:.01em;
+}
+.loader-today strong{
+  font-family:'Fraunces', Georgia, serif;
+  font-weight:600;
+  font-style:italic;
+  color:var(--ochre);
+}
+.loader-city-board{
+  position:relative;
+  z-index:3;
+  margin:18px auto 0;
+  max-width:560px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  padding:8px;
+  border-radius:18px;
+  background:rgba(10,10,8,.22);
+  border:1px solid rgba(240,231,214,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+}
+.loader-city-cell{
+  min-width:0;
+  padding:9px 6px 8px;
+  border-radius:12px;
+  background:rgba(240,231,214,.07);
+  border:1px solid rgba(240,231,214,.08);
+  text-align:center;
+  transition:background .35s ease, transform .35s ease, border-color .35s ease;
+}
+.loader-city-cell.is-today{
+  background:linear-gradient(160deg, rgba(196,77,42,.95), rgba(201,138,60,.88));
+  border-color:rgba(255,241,213,.32);
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(196,77,42,.24);
+}
+.loader-city-day{
+  display:block;
+  font-size:9px;
+  line-height:1;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(240,231,214,.62);
+  white-space:nowrap;
+}
+.loader-city-cell.is-today .loader-city-day{color:rgba(255,248,232,.82)}
+.loader-city-name{
+  display:block;
+  margin-top:5px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-family:'Fraunces', Georgia, serif;
+  font-size:clamp(10px, 1.5vw, 13px);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:#fff1d5;
+}
+@media (max-width:720px){
+  .loader-today{margin:18px auto -8px;padding:9px 12px;font-size:13px}
+  .loader-city-board{grid-template-columns:repeat(2,1fr);max-width:330px;gap:5px;margin-top:14px}
+  .loader-city-cell{padding:8px 6px}
+  .loader-city-cell:nth-child(7){grid-column:1/-1}
+}
+
+
+/* Ajustement demandé : loader simplifié, phrase du jour grande, sans cases planning */
+.loader-card{
+  padding-top:clamp(28px, 5vw, 50px);
+}
+.loader-today-main{
+  width:min(100%, 650px);
+  margin:18px auto 2px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  color:#fff1d5;
+  font-family:'Fraunces', Georgia, serif;
+  font-size:clamp(37px, 7.2vw, 78px);
+  font-weight:300;
+  line-height:.96;
+  letter-spacing:-.045em;
+  text-align:center;
+  text-wrap:balance;
+  text-shadow:0 18px 50px rgba(0,0,0,.42);
+}
+.loader-today-main strong{
+  color:var(--ochre);
+  font-weight:600;
+  font-style:italic;
+}
+.loader-city-highlight{
+  position:relative;
+  display:inline-block;
+  color:#ffd78a!important;
+  padding:0 .08em .03em;
+  text-shadow:
+    0 0 18px rgba(247, 211, 109, .36),
+    0 12px 38px rgba(196, 77, 42, .34),
+    0 20px 55px rgba(0,0,0,.44);
+  animation:loaderCityPulse 1.55s cubic-bezier(.2,.8,.2,1) infinite;
+}
+.loader-city-highlight::before{
+  content:"";
+  position:absolute;
+  left:-.08em;
+  right:-.08em;
+  bottom:.02em;
+  height:.22em;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(196,77,42,.18), rgba(247,211,109,.62), rgba(196,77,42,.18));
+  transform:skewX(-10deg) scaleX(.96);
+  transform-origin:center;
+  z-index:-1;
+  filter:blur(.2px);
+  animation:loaderCityUnderline 1.55s cubic-bezier(.2,.8,.2,1) infinite;
+}
+.loader-city-highlight::after{
+  content:"";
+  position:absolute;
+  inset:-.1em -.18em;
+  border-radius:999px;
+  background:radial-gradient(ellipse at center, rgba(247,211,109,.22), rgba(247,211,109,0) 66%);
+  z-index:-2;
+  opacity:.8;
+  animation:loaderCityGlow 1.55s ease-in-out infinite;
+}
+@keyframes loaderCityPulse{
+  0%,100%{transform:translateY(0) scale(1)}
+  45%{transform:translateY(-2px) scale(1.045)}
+}
+@keyframes loaderCityUnderline{
+  0%,100%{opacity:.55;transform:skewX(-10deg) scaleX(.92)}
+  45%{opacity:1;transform:skewX(-10deg) scaleX(1.04)}
+}
+@keyframes loaderCityGlow{
+  0%,100%{opacity:.45;transform:scale(.96)}
+  45%{opacity:1;transform:scale(1.08)}
+}
+
+.loader-signpost{
+  position:absolute;
+  left:calc(50% + clamp(132px, 21vw, 196px));
+  bottom:38px;
+  z-index:9;
+  width:clamp(132px, 20vw, 178px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transform-origin:50% 100%;
+  animation:loaderSignSway 4.2s ease-in-out infinite;
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.28));
+}
+.loader-signplate-top{
+  position:relative;
+  z-index:2;
+  padding:3px 10px 4px;
+  border-radius:5px;
+  background:linear-gradient(180deg, #efcc58, #d1a92d);
+  border:2px solid #17120f;
+  color:#15110f;
+  font-size:clamp(9px, 1vw, 10px);
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  box-shadow:0 4px 10px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.loader-signplate-main{
+  position:relative;
+  margin-top:4px;
+  width:100%;
+  padding:8px 12px;
+  border-radius:4px;
+  background:linear-gradient(180deg, #f6f1e9 0%, #ece3d3 100%);
+  border:3px solid #c53024;
+  box-shadow:0 10px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.55);
+}
+.loader-signplate-main::before{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border:1px solid rgba(255,255,255,.45);
+  border-radius:2px;
+  pointer-events:none;
+}
+.loader-signplate-main span{
+  display:block;
+  position:relative;
+  z-index:1;
+  color:#1a1411;
+  font-family:'Inter', system-ui, sans-serif;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:clip;
+  white-space:nowrap;
+  font-size:clamp(11px, 1.45vw, 17px);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.045em;
+  transform:scaleX(.94);
+  transform-origin:center;
+  text-transform:uppercase;
+  text-align:center;
+  text-shadow:0 1px 0 rgba(255,255,255,.35);
+}
+.loader-sign-pole{
+  width:8px;
+  height:72px;
+  margin-top:-1px;
+  border-radius:4px;
+  background:linear-gradient(180deg, #bcc4ca 0%, #8d969c 34%, #6e767d 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42), 0 8px 14px rgba(0,0,0,.16);
+}
+.loader-sign-base{
+  width:62px;
+  height:10px;
+  margin-top:-2px;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.42), rgba(0,0,0,0) 70%);
+  filter:blur(.5px);
+  opacity:.55;
+}
+@keyframes loaderSignSway{
+  0%,100%{transform:translateX(-50%) rotate(-1.2deg)}
+  50%{transform:translateX(-50%) rotate(.9deg)}
+}
+.loader-visual{
+  margin-top:clamp(16px, 3vw, 30px);
+  margin-bottom:clamp(20px, 3vw, 30px);
+}
+.loader-progress-wrap{
+  margin-top:0;
+}
+.loader-city-board,
+.loader-status{
+  display:none!important;
+}
+@media (max-width:720px){
+  .loader-today-main{
+    margin-top:14px;
+    font-size:clamp(34px, 12vw, 56px);
+    line-height:1;
+  }
+  .loader-visual{height:210px;margin-top:18px}
+  .loader-signpost{left:calc(50% + 104px);bottom:34px;width:142px}
+  .loader-signplate-main{padding:7px 9px}
+  .loader-signplate-main span{font-size:13px;letter-spacing:.025em;transform:scaleX(.9)}
+  .loader-sign-pole{height:62px}
+}
+
+
+@media (max-width:430px){
+  .loader-signpost{left:calc(50% + 88px);width:132px}
+  .loader-signplate-main span{font-size:12px;letter-spacing:.015em;transform:scaleX(.88)}
+}
+
+/* Ajustement demandé : même silhouette compacte pour le camion de section/navigation */
+.nav-truck-indicator{
+  width:68px;
+  height:48px;
+}
+.nav-truck-indicator svg{
+  transform:scaleX(.9) scaleY(1.14);
+  transform-origin:50% 100%;
+}
+.nav-truck-indicator::before{
+  left:13px;
+  right:14px;
+  bottom:-2px;
+}
+@media (max-width:960px){
+  .mobile-menu a.is-active::before{
+    width:25px;
+    height:20px;
+    background:
+      radial-gradient(circle at 7px 17px,#f0e7d6 0 2px,transparent 2.4px),
+      radial-gradient(circle at 20px 17px,#f0e7d6 0 2px,transparent 2.4px),
+      linear-gradient(0deg,var(--ember),var(--ember)) 5px 3px/15px 7px no-repeat,
+      linear-gradient(0deg,#f0e7d6,#f0e7d6) 2px 8px/22px 10px no-repeat;
+  }
+}
+
+</style>
+</head>
+<body class="is-loading">
+
+<div class="site-loader" id="siteLoader" role="status" aria-live="polite" aria-label="Chargement du site La Marmaille">
+  <div class="loader-stage">
+    <div class="loader-card">
+      <div class="loader-sparks" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <div class="loader-badge">Food truck au feu de bois</div>
+      <div class="loader-today loader-today-main" id="loaderToday">Aujourd'hui, <strong>...</strong>, nous sommes à <strong class="loader-city-highlight">...</strong></div>
+
+      <div class="loader-visual" aria-hidden="true">
+        <div class="loader-market-lights"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="loader-road"></div>
+        <div class="loader-headlight"></div>
+        <div class="loader-steam"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="loader-exhaust"><span></span><span></span><span></span></div>
+        <div class="loader-truck">
+          <svg viewBox="0 0 220 150" focusable="false" aria-hidden="true">
+            <defs>
+              <linearGradient id="loaderTruckBody" x1="26" y1="42" x2="142" y2="118" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#fff3d8"/>
+                <stop offset=".52" stop-color="#f0e7d6"/>
+                <stop offset="1" stop-color="#d3bb91"/>
+              </linearGradient>
+              <linearGradient id="loaderTruckRoof" x1="42" y1="14" x2="128" y2="54" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#e0703e"/>
+                <stop offset="1" stop-color="#8e2e15"/>
+              </linearGradient>
+            </defs>
+            <path class="roof" d="M45 21h82c9.5 0 17.4 7.2 18.3 16.7l.8 9.8H31.5v-5.2C31.5 30.5 38.8 21 45 21Z"/>
+            <path class="body" d="M33 47.5h112c10.6 0 19.2 8.6 19.2 19.2v43.8H35.2C23.6 110.5 14 100.9 14 89.3V69.2C14 57.2 22.5 47.5 33 47.5Z"/>
+            <path class="cab" d="M157 54.5h22.5c9.7 0 18.5 5.5 22.8 14.2l11.3 23.2c1.5 3.2 2.4 6.7 2.4 10.3v8.3h-59V54.5Z"/>
+            <path class="window" d="M170 62.4h10.3c5.7 0 10.8 3.2 13.3 8.3l6 12.4H170V62.4Z"/>
+            <path class="awning-cream" d="M38 47.5h18v18.5H38zM74 47.5h18v18.5H74zM110 47.5h18v18.5h-18z"/>
+            <path class="awning-red" d="M56 47.5h18v18.5H56zM92 47.5h18v18.5H92zM128 47.5h17.2c6.2 0 11.8 3 15.3 7.7V66H128z"/>
+            <rect class="sign" x="53" y="76" width="70" height="24" rx="6"/>
+            <text class="sign-text" x="88" y="92" text-anchor="middle">Marmaille</text>
+            <path class="line" d="M31 110.5h138M44 66h112M136 66v44.5M158 110.5h56"/>
+            <path class="line" d="M35 85h15M128 85h17M157 72v31M199 104h14" opacity=".55"/>
+            <path class="line" d="M177 91h21M181 96h22" opacity=".35"/>
+            <circle class="lamp" cx="211" cy="101" r="4.6"/>
+            <rect class="tail" x="14" y="94" width="6.5" height="12.5" rx="2.2"/>
+            <circle class="wheel" cx="56" cy="116" r="16.5"/>
+            <circle class="rim" cx="56" cy="116" r="8.9"/>
+            <circle class="hub" cx="56" cy="116" r="3.8"/>
+            <circle class="wheel" cx="164" cy="116" r="16.5"/>
+            <circle class="rim" cx="164" cy="116" r="8.9"/>
+            <circle class="hub" cx="164" cy="116" r="3.8"/>
+          </svg>
+        </div>
+        <div class="loader-signpost" aria-hidden="true">
+          <div class="loader-signplate-top">D 127</div>
+          <div class="loader-signplate-main"><span id="loaderSignCity">RIAILLÉ</span></div>
+          <div class="loader-sign-pole"></div>
+          <div class="loader-sign-base"></div>
+        </div>
+      </div>
+
+      <div class="loader-progress-wrap" aria-hidden="true">
+        <div class="loader-progress"><span id="loaderProgress"></span></div>
+        <div class="loader-percent" id="loaderPercent">0%</div>
+      </div>
+    </div>
+  </div>
+</div>
+<noscript><style>.site-loader{display:none!important}body.is-loading{overflow:auto!important;touch-action:auto!important}</style></noscript>
+
+
+<nav id="nav">
+  <a href="#" class="logo-mark"><span class="dot"></span>La Marmaille</a>
+  <div class="nav-links">
+    <a href="#histoire">Histoire</a>
+    <a href="#carte">Carte</a>
+    <a href="#planning">Planning</a>
+    <a href="#evenements">Privatisation</a>
+    <a href="#contact">Réserver</a>
+  </div>
+  <div class="nav-truck-indicator" id="navTruck" aria-hidden="true">
+    <svg viewBox="0 0 128 72" role="img" focusable="false">
+      <defs>
+        <linearGradient id="truckPaint" x1="14" y1="18" x2="94" y2="58" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#fff3d8"/>
+          <stop offset=".55" stop-color="#f0e7d6"/>
+          <stop offset="1" stop-color="#d9c7a7"/>
+        </linearGradient>
+        <linearGradient id="truckRoof" x1="20" y1="8" x2="74" y2="28" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#d46a39"/>
+          <stop offset="1" stop-color="#8e2e15"/>
+        </linearGradient>
+        <linearGradient id="truckCab" x1="83" y1="24" x2="112" y2="48" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#f5ead8"/>
+          <stop offset="1" stop-color="#cdb891"/>
+        </linearGradient>
+      </defs>
+      <circle class="nav-truck-smoke" cx="13" cy="35" r="4.5"/>
+      <circle class="nav-truck-smoke" cx="7" cy="28" r="2.8" style="animation-delay:.16s"/>
+      <circle class="nav-truck-spark" cx="16" cy="47" r="1.6" style="animation-delay:.08s"/>
+      <path class="nav-truck-roof" d="M26 14h45c4.6 0 8.4 3.6 8.7 8.2l.2 4.1H18.7v-2.5C18.7 18.4 22.7 14 26 14Z"/>
+      <path class="nav-truck-paint" d="M20.5 25.5h59.2c5.9 0 10.7 4.8 10.7 10.7v15.3H21.8c-6.2 0-11.3-5.1-11.3-11.3v-3.4c0-6.2 4.6-11.3 10-11.3Z"/>
+      <path class="nav-truck-cab" d="M89.5 32.3h14.1c3.8 0 7.2 2.1 8.9 5.4l5.8 11.1c.7 1.3-.2 2.9-1.7 2.9H89.5V32.3Z"/>
+      <path class="nav-truck-window" d="M96.2 35.9h7.4c1.7 0 3.2.9 4 2.4l3.2 6.1H96.2v-8.5Z"/>
+      <path class="nav-truck-glass" d="M99 37.6h2.8l-4 6.1H95.8Z"/>
+      <path class="nav-truck-awning-light" d="M23 25.5h10v8.2H23zM43 25.5h10v8.2H43zM63 25.5h10v8.2H63z"/>
+      <path class="nav-truck-awning" d="M33 25.5h10v8.2H33zM53 25.5h10v8.2H53zM73 25.5h7.1c2.3 0 4.3.7 6 2.1v6.1H73z"/>
+      <rect class="nav-truck-sign" x="31" y="37" width="35" height="10" rx="2.2"/>
+      <text class="nav-truck-sign-text" x="48.5" y="44.4" text-anchor="middle">Marmaille</text>
+      <path class="nav-truck-line" d="M19 51.5h75M28 34h52M74 34v17M90 51.5h29"/>
+      <path class="nav-truck-detail" d="M20 41h7M70 41h8M88 38v9M108 49h9"/>
+      <circle class="nav-truck-light" cx="116.5" cy="47.7" r="2.6"/>
+      <rect class="nav-truck-tail" x="10.8" y="43.8" width="3.2" height="5.8" rx="1.4"/>
+      <rect class="nav-truck-bumper" x="7.5" y="50" width="16" height="3.5" rx="1.6"/>
+      <rect class="nav-truck-bumper" x="108" y="50" width="13" height="3.5" rx="1.6"/>
+      <circle class="nav-truck-wheel" cx="32" cy="53" r="8.2"/>
+      <circle class="nav-truck-rim" cx="32" cy="53" r="4.4"/>
+      <circle class="nav-truck-wheel-dot" cx="32" cy="53" r="2.1"/>
+      <circle class="nav-truck-wheel" cx="93" cy="53" r="8.2"/>
+      <circle class="nav-truck-rim" cx="93" cy="53" r="4.4"/>
+      <circle class="nav-truck-wheel-dot" cx="93" cy="53" r="2.1"/>
+    </svg>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#histoire" data-mm><span>01</span>Histoire</a>
+  <a href="#carte" data-mm><span>02</span>La carte</a>
+  <a href="#planning" data-mm><span>03</span>Planning</a>
+  <a href="#evenements" data-mm><span>04</span>Privatisation</a>
+  <a href="#galerie" data-mm><span>05</span>Galerie</a>
+  <a href="#contact" data-mm><span>06</span>Réserver</a>
+  <div class="mm-foot">
+    Riaillé · Châteaubriant · Nort-sur-Erdre · Ancenis<br>
+    07 82 14 36 09 — bonjour@lamarmaille.fr
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-eyebrow"><span class="line"></span><span>Food truck · au feu de bois · depuis 2021</span></div>
+  <div class="hero-meta">
+    <span>N° 47°27′N — 1°18′W</span>
+    <span>Riaillé / Loire-Atlantique</span>
+  </div>
+
+  <div class="hero-live-location reveal" aria-label="Position actuelle du food truck">
+    <span class="hero-location-pin" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    </span>
+    <span class="hero-location-text">
+      <span class="hero-location-kicker">Camion en service aujourd'hui</span>
+      <span class="hero-location-city">Riaillé</span>
+      <span class="hero-location-note">on cuisine ici</span>
+    </span>
+  </div>
+
+  <h1>
+    Cuisine du <em>feu</em>,<br>
+    fa&ccedil;on <em>marmaille</em><span class="stamp">★ Bistronomie nomade</span>
+  </h1>
+
+  <div class="hero-photo">
+    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1000&auto=format&fit=crop" alt="Service en cuisine au feu de bois" loading="eager">
+  </div>
+  <div class="hero-tag">cuit au feu, servi sur l'instant</div>
+
+  <div class="hero-bottom">
+    <p class="hero-intro">
+      On roule entre Riaillé, Châteaubriant, Nort-sur-Erdre et Ancenis avec un camion à plancha, un four à bois et une obsession : cuisiner en direct, avec ce que les producteurs du coin nous donnent le matin même. Pas de carte figée, pas de mensonge — juste l'ardoise du jour.
+    </p>
+    <div class="hero-actions">
+      <a href="#planning" class="btn btn-primary">
+        Où nous trouver
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#evenements" class="btn btn-ghost">Privatiser le camion</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">défiler</div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>★ Cuisine au feu de bois</span><span class="sep">/</span>
+    <span>Producteurs locaux</span><span class="sep">/</span>
+    <span>Ardoise du jour</span><span class="sep">/</span>
+    <span>Made in Riaillé</span><span class="sep">/</span>
+    <span>★ Cuisine au feu de bois</span><span class="sep">/</span>
+    <span>Producteurs locaux</span><span class="sep">/</span>
+    <span>Ardoise du jour</span><span class="sep">/</span>
+    <span>Made in Riaillé</span><span class="sep">/</span>
+  </div>
+</div>
+
+<!-- ============ HISTOIRE ============ -->
+<section class="histoire" id="histoire">
+  <div class="section-tag histoire-tag reveal">Chapitre I — D'où ça vient</div>
+
+  <h2 class="histoire-title reveal">
+    Une vieille remorque, un <em>foyer en fonte</em>, et l'envie d'arrêter les conneries.
+  </h2>
+
+  <div class="histoire-photo-1 reveal">
+    <img src="images/mise_en_place.png" alt="Cuisinier travaillant au camion">
+    <div class="cap">Léo, en pleine mise en place — Riaillé, mardi matin</div>
+  </div>
+
+  <div class="histoire-text reveal">
+    <p>
+      <strong>La Marmaille, c'est d'abord deux frangins, Léo et Mathis, qui ont posé leurs tabliers chez les autres pour cuisiner enfin pour eux.</strong> Un camion chiné en 2021 du côté d'Angers, retapé tout l'hiver dans la grange du grand-père à Riaillé, et un four à bois soudé maison qui sent encore parfois la suie d'un week-end de 14h de service.
+    </p>
+    <p>
+      On ne fait pas du « street food ». On fait de la cuisine de bistrot — vraie, salée, fumée — qu'on emmène sur les routes du pays castelbriantais, du Nord-Erdre et de l'Ancenis. Légumes du maraîcher de Joué, fromages de la chèvrerie de Mésanger, pain du moulin de Pannecé. <strong>Tout ce qui peut tenir en circuit court tient en circuit court.</strong>
+    </p>
+    <p>
+      Le nom ? Une moquerie de notre mère. « Vous deux, plus la cuisine, plus le bordel — c'est toute une marmaille. » On l'a gardé.
+    </p>
+  </div>
+
+  <div class="signature reveal">
+    <div>
+      <div class="sig-name">Léo &amp; Mathis</div>
+      <div class="sig-role">cuisiniers · vagabonds</div>
+    </div>
+  </div>
+
+  <div class="histoire-stats reveal">
+    <div class="stat">
+      <div class="num"><em>04</em></div>
+      <div class="lbl">saisons sur la route</div>
+    </div>
+    <div class="stat">
+      <div class="num">38</div>
+      <div class="lbl">producteurs partenaires</div>
+    </div>
+    <div class="stat">
+      <div class="num"><em>120+</em></div>
+      <div class="lbl">événements privatisés</div>
+    </div>
+    <div class="stat">
+      <div class="num">100%</div>
+      <div class="lbl">cuit au bois</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARDOISE ============ -->
+<section class="ardoise" id="carte">
+  <div class="ardoise-head">
+    <div class="reveal">
+      <div class="section-tag">Chapitre II — L'ardoise</div>
+      <h2>L'<em>ardoise</em><br>du moment.</h2>
+    </div>
+    <p class="head-note reveal">
+      <span class="script">Note du chef —</span>
+      Tout évolue chaque semaine selon les arrivages. Ce qu'on vous montre ici, ce sont les classiques qui reviennent souvent. Le reste, on l'écrit le matin à la craie.
+    </p>
+  </div>
+
+  <div class="menu-grid">
+    <article class="dish dish-1 reveal">
+      <div class="dish-photo">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop" alt="Burger maison">
+        <span class="dish-num">N°01</span>
+        <span class="dish-tag">Signature</span>
+      </div>
+      <div class="dish-name">Le Brûlot du chef <span class="price">14 €</span></div>
+      <p class="dish-desc">Bœuf de Mésanger, oignons confits 6h au feu, cantal vieux affiné, pickles maison, pain de campagne grillé sur la plancha.</p>
+    </article>
+
+    <article class="dish dish-2 reveal">
+      <div class="dish-photo">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&auto=format&fit=crop" alt="Pizza au feu de bois">
+        <span class="dish-num">N°02</span>
+      </div>
+      <div class="dish-name">Tarte flambée des champs <span class="price">12 €</span></div>
+      <p class="dish-desc">Pâte fine au levain, crème fermière, lardons fumés au pommier, jeunes oignons, ciboule du jardin. 90 secondes au four à bois.</p>
+    </article>
+
+    <article class="dish dish-3 reveal">
+      <div class="dish-photo">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&auto=format&fit=crop" alt="Bowl de saison">
+        <span class="dish-num">N°03</span>
+        <span class="dish-tag veg">Veggie</span>
+      </div>
+      <div class="dish-name">Bol des maraîchers <span class="price">11 €</span></div>
+      <p class="dish-desc">Légumes rôtis selon saison, pois chiches grillés, sauce yaourt-tahini, herbes du potager, graines torréfiées.</p>
+    </article>
+
+    <article class="dish dish-4 reveal">
+      <div class="dish-photo">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=700&auto=format&fit=crop" alt="Pièce de viande grillée">
+        <span class="dish-num">N°04</span>
+      </div>
+      <div class="dish-name">Côte de cochon, sauce moutarde <span class="price">16 €</span></div>
+      <p class="dish-desc">Cochon élevé en plein air à Pannecé, rosé à l'os, jus court à l'échalote et moutarde de Bretagne, pommes de terre grenailles.</p>
+    </article>
+
+    <article class="dish dish-5 reveal">
+      <div class="dish-photo">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=700&auto=format&fit=crop" alt="Sandwich gourmet">
+        <span class="dish-num">N°05</span>
+      </div>
+      <div class="dish-name">Le sandwich du dimanche <span class="price">10 €</span></div>
+      <p class="dish-desc">Effiloché de porc fumé 12h, coleslaw au vinaigre de cidre, pickles d'oignon rouge, pain brioché toasté.</p>
+    </article>
+
+    <article class="dish dish-6 reveal">
+      <div class="dish-photo">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&auto=format&fit=crop" alt="Dessert maison">
+        <span class="dish-num">N°06</span>
+        <span class="dish-tag veg">Sucré</span>
+      </div>
+      <div class="dish-name">Pavlova fumée, fruits du jour <span class="price">7 €</span></div>
+      <p class="dish-desc">Meringue craquante légèrement fumée au feu, crème fouettée à la vanille, fruits cueillis le matin, coulis au choix.</p>
+    </article>
+  </div>
+
+  <div class="menu-foot reveal">
+    <p>Tout est cuit minute, à la commande, devant vous. On accepte les sourires, les gros billets, et les enfants qui touchent à tout.</p>
+    <div class="price-info">Menu du jour 18 € · Plat + dessert<br>Vins nature au verre 4–6 €</div>
+  </div>
+</section>
+
+<!-- ============ PLANNING ============ -->
+<section class="planning" id="planning">
+  <div class="planning-wrap">
+    <div class="planning-head">
+      <div class="reveal">
+        <div class="section-tag">Chapitre III — Sur la route</div>
+        <h2>Cette <em>semaine</em>, on est là.</h2>
+      </div>
+      <p class="planning-sub reveal">
+        Planning qui change selon les marchés et les saisons. Pour vérifier en temps réel, on poste tout sur Instagram le dimanche soir.
+      </p>
+    </div>
+
+    <div class="calendar reveal">
+      <div class="day">
+        <div class="day-name">Lundi</div>
+        <div class="day-meta">Repos &amp; mise en place</div>
+        <div class="day-spot" style="opacity:.45">
+          <div class="where">Atelier Riaillé</div>
+          <div class="when">Pas de service</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-name">Mardi</div>
+        <div class="day-meta">Marché</div>
+        <div class="day-spot">
+          <div class="where">Châteaubriant<br>Place de la Motte</div>
+          <div class="when">11h30 — 14h</div>
+        </div>
+      </div>
+
+      <div class="day featured">
+        <div class="badge">+ four à pizza</div>
+        <div class="day-name">Mercredi</div>
+        <div class="day-meta">Soir</div>
+        <div class="day-spot">
+          <div class="where">Nort-sur-Erdre<br>Quai de la Vieille Mairie</div>
+          <div class="when">18h — 22h</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-name">Jeudi</div>
+        <div class="day-meta">Midi</div>
+        <div class="day-spot">
+          <div class="where">Ancenis<br>Place du Pont</div>
+          <div class="when">11h30 — 14h</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-name">Vendredi</div>
+        <div class="day-meta">Soir &amp; tard</div>
+        <div class="day-spot">
+          <div class="where">Riaillé<br>Place de l'Église</div>
+          <div class="when">18h — 23h</div>
+        </div>
+      </div>
+
+      <div class="day featured">
+        <div class="badge">★ live music</div>
+        <div class="day-name">Samedi</div>
+        <div class="day-meta">Événement</div>
+        <div class="day-spot">
+          <div class="where">Sur réservation<br>Privatisations</div>
+          <div class="when">Variable</div>
+        </div>
+      </div>
+
+      <div class="day closed">
+        <div class="day-name">Dimanche</div>
+        <div class="day-meta">Fermé</div>
+        <div class="day-spot">
+          <div class="where">On dort, vraiment.</div>
+          <div class="when">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planning-foot reveal">
+      <div class="legend">
+        <div class="legend-item"><span class="legend-dot regular"></span>Service classique</div>
+        <div class="legend-item"><span class="legend-dot special"></span>Soirée / four à pizza</div>
+        <div class="legend-item"><span class="legend-dot off"></span>Repos</div>
+      </div>
+      <div>Suivez-nous sur Instagram <strong>@lamarmaille.truck</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÉVÉNEMENTS ============ -->
+<section class="events" id="evenements">
+  <div class="events-wrap">
+    <div class="events-photo reveal">
+      <div class="stamp">Devis<br>en 24h</div>
+      <div class="ph-main">
+        <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=900&auto=format&fit=crop" alt="Service événementiel en extérieur">
+      </div>
+      <div class="ph-mini">
+        <img src="https://images.unsplash.com/photo-1535473895227-bdecb20fb157?w=600&auto=format&fit=crop" alt="Détail de plat">
+      </div>
+    </div>
+
+    <div class="events-text reveal">
+      <div class="section-tag">Chapitre IV — Privatisation</div>
+      <h2>On <em>déplace le feu</em><br>jusque chez vous.</h2>
+      <p>
+        Mariage en pleine campagne, anniversaire, vin d'honneur, séminaire d'entreprise, fête de village, après-soutenance — on amène le camion, le four à bois, deux cuisiniers, et une carte qu'on construit avec vous selon la saison et le nombre. De 25 à 350 personnes.
+      </p>
+
+      <ul class="event-types">
+        <li>
+          <span class="ev-num">01 —</span>
+          <div class="ev-name">Mariage &amp; cérémonie</div>
+          <p class="ev-desc">Cocktail dînatoire au feu de bois, ardoise principale, pièces sucrées. Devis sur mesure.</p>
+        </li>
+        <li>
+          <span class="ev-num">02 —</span>
+          <div class="ev-name">Entreprise &amp; séminaire</div>
+          <p class="ev-desc">Pause déjeuner au camion, soirée d'équipe, lancement produit. Facture pro.</p>
+        </li>
+        <li>
+          <span class="ev-num">03 —</span>
+          <div class="ev-name">Anniversaire &amp; famille</div>
+          <p class="ev-desc">Formules conviviales à partir de 25 personnes. On s'occupe de tout.</p>
+        </li>
+        <li>
+          <span class="ev-num">04 —</span>
+          <div class="ev-name">Fête de village</div>
+          <p class="ev-desc">Comités des fêtes, associations, marchés gourmands. Tarifs adaptés.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERIE ============ -->
+<section class="galerie" id="galerie">
+  <div class="galerie-head">
+    <div class="reveal">
+      <div class="section-tag">Chapitre V — En images</div>
+      <h2>Saisons, <em>visages</em>, fumée.</h2>
+    </div>
+    <p class="reveal">Quelques fragments de la dernière année — services, mises en place, levers de jour aux marchés, soirées qui ont fini tard.</p>
+  </div>
+
+  <div class="gallery-strip" id="gallery">
+    <div class="gimg tall reveal" data-cap="Marché du mardi · Châteaubriant">
+      <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&auto=format&fit=crop" alt="Légumes au marché">
+    </div>
+    <div class="gimg wide reveal" data-cap="Service du soir · Riaillé">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&auto=format&fit=crop" alt="Ambiance service du soir">
+    </div>
+    <div class="gimg square reveal" data-cap="Préparation au feu">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&auto=format&fit=crop" alt="Plat dressé sur ardoise">
+    </div>
+    <div class="gimg tall reveal" data-cap="Léo en mise en place">
+      <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&auto=format&fit=crop" alt="Cuisinier au travail">
+    </div>
+    <div class="gimg wide reveal" data-cap="Mariage · juin 2025">
+      <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&auto=format&fit=crop" alt="Service en extérieur">
+    </div>
+    <div class="gimg square reveal" data-cap="Détail · côte de cochon">
+      <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=700&auto=format&fit=crop" alt="Plat dressé">
+    </div>
+    <div class="gimg tall reveal" data-cap="Le four à 6h du matin">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&auto=format&fit=crop" alt="Four à bois allumé">
+    </div>
+    <div class="gimg wide reveal" data-cap="Bois sec · cerisier &amp; chêne">
+      <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&auto=format&fit=crop" alt="Bois pour le feu">
+    </div>
+  </div>
+
+  <div class="gallery-meta">
+    <span>← Faites défiler horizontalement</span>
+    <span>Photos · Hadrien Cailloux pour La Marmaille</span>
+  </div>
+</section>
+
+<!-- ============ AVIS ============ -->
+<section class="avis">
+  <div class="avis-wrap">
+    <div class="avis-head">
+      <div class="reveal">
+        <div class="section-tag" style="color:var(--ochre)"><span style="background:var(--ochre)"></span>Chapitre VI — Bouche à oreille</div>
+        <h2>Ce qu'on <em>raconte</em><br>de nous.</h2>
+      </div>
+      <div class="avis-rating reveal">
+        <div class="stars">★★★★★</div>
+        <div class="info">4,9 / 5 · 217 avis Google</div>
+      </div>
+    </div>
+
+    <div class="avis-grid">
+      <article class="avis-card avis-1 reveal">
+        <div class="stars-mini">★★★★★</div>
+        <p class="quote">On les a eus pour notre mariage à Joué-sur-Erdre. 110 invités, le four allumé dès 17h, et plus rien dans les assiettes à minuit. Service impeccable, deux gars adorables, et la côte de cochon — sérieusement, j'en parle encore.</p>
+        <div class="who">
+          <div class="ini">CM</div>
+          <div><div class="nm">Camille &amp; Mathieu</div><div class="lc">Mariage · juin 2025</div></div>
+        </div>
+      </article>
+
+      <article class="avis-card avis-2 reveal">
+        <div class="stars-mini">★★★★★</div>
+        <p class="quote">Tous les mardis midi à Châteaubriant, je fais le détour. La tarte flambée vaut largement n'importe quel restaurant assis du coin, et c'est dit en connaissance de cause. Bravo les gars, continuez.</p>
+        <div class="who">
+          <div class="ini">PD</div>
+          <div><div class="nm">Pierre Daviau</div><div class="lc">Habitué · Châteaubriant</div></div>
+        </div>
+      </article>
+
+      <article class="avis-card avis-3 reveal">
+        <div class="stars-mini">★★★★★</div>
+        <p class="quote">Honnête, gourmand, sans prétention. Mes gosses adorent, moi aussi.</p>
+        <div class="who">
+          <div class="ini">JL</div>
+          <div><div class="nm">Julie Loiret</div><div class="lc">Nort-sur-Erdre</div></div>
+        </div>
+      </article>
+
+      <article class="avis-card avis-4 reveal">
+        <div class="stars-mini">★★★★★</div>
+        <p class="quote">On a privatisé le truck pour notre séminaire d'agence (45 personnes, en pleine campagne près d'Ancenis). Devis clair, équipe pro, produits magnifiques. Toute l'équipe en parle encore trois mois après. On rebooke pour décembre.</p>
+        <div class="who">
+          <div class="ini">SR</div>
+          <div><div class="nm">Sophie Renard</div><div class="lc">Studio Bonnet · Nantes</div></div>
+        </div>
+      </article>
+
+      <article class="avis-card avis-5 reveal">
+        <div class="stars-mini">★★★★★</div>
+        <p class="quote">J'avais peur que ce soit un énième food truck branché. C'est tout l'inverse — vrais cuisiniers, vrais produits, et un accueil qui fait du bien. Le bowl veggie est probablement le meilleur que j'ai mangé cette année.</p>
+        <div class="who">
+          <div class="ini">FT</div>
+          <div><div class="nm">Fanny Thébault</div><div class="lc">Ancenis · cliente régulière</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="faq-wrap">
+    <aside class="faq-side reveal">
+      <div class="section-tag">Chapitre VII — On vous répond</div>
+      <h2>Les <em>questions</em><br>qu'on nous pose<br>tout le temps.</h2>
+      <p>Si la réponse n'y est pas, écrivez-nous — on essaie de répondre dans la journée, même un dimanche soir entre deux fournées.</p>
+    </aside>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Vous prenez la carte bancaire ?
+          <span class="icn">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Oui, sans contact, Apple Pay, Google Pay et même les chèques — sauf en cas de panne réseau le mardi midi à Châteaubriant (ça arrive). On accepte aussi les tickets restaurant papier et dématérialisés.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Il y a une option végétarienne ?
+          <span class="icn">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Toujours au moins un plat principal et un dessert. La pavlova et le bol des maraîchers sont des classiques, et on ajoute selon saison une tarte fine légumes ou une focaccia garnie. Pour le végétalien, on s'adapte avec un peu d'avance — prévenez-nous au moment de commander.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Vous gérez les allergies et intolérances ?
+          <span class="icn">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Oui, mais avec honnêteté : on cuisine au feu de bois sur un espace réduit, donc on ne peut pas garantir une cuisine 100% sans gluten ou sans traces. Pour les allergies sévères, prévenez-nous à l'avance pour les privatisations — on peut adapter une mise en place dédiée.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          À partir de combien de personnes vous privatisez ?
+          <span class="icn">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Minimum 25 couverts en semaine, 40 le week-end. Au-delà de 200, on travaille avec un second four mobile et on renforce l'équipe. Devis personnalisé selon la formule, le lieu et la saison.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Vous vous déplacez jusqu'où ?
+          <span class="icn">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Pour les services hebdomadaires, on tourne entre Riaillé, Châteaubriant, Nort-sur-Erdre et Ancenis. Pour les privatisations, on accepte volontiers tout le département (44) et le sud du 35 / 49. Au-delà, on en discute autour d'un café.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Combien de temps à l'avance faut-il réserver ?
+          <span class="icn">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Pour un mariage en juin-juillet : six mois minimum, on est complets vite. Pour un anniversaire en semaine ou un séminaire, deux à trois semaines suffisent généralement. Et pour un dépannage de dernière minute — appelez, on regarde.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="section-tag reveal">Chapitre VIII — On se parle</div>
+      <h2 class="reveal">Une <em>réservation</em>, une question, un café ?</h2>
+      <p class="reveal">
+        Le plus simple reste de nous appeler. Sinon, le formulaire arrive directement sur le téléphone du camion — on lit tout, on répond généralement dans la journée, parfois entre deux services.
+      </p>
+
+      <div class="contact-cta">
+        <a href="tel:+33782143609" class="reveal">
+          <div class="ico tel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <span class="lbl">Téléphone</span>
+            <span class="val">07 82 14 36 09</span>
+          </div>
+        </a>
+
+        <a href="https://wa.me/33782143609" target="_blank" rel="noopener" class="reveal">
+          <div class="ico wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.9-.4-1.7-.9-2.4-1.7-.6-.7-1.1-1.5-1.5-2.4-.1-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2.1-.3 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3 0-.1-.2-.2-.5-.4M12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3.1 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2"/></svg>
+          </div>
+          <div>
+            <span class="lbl">WhatsApp · plus rapide</span>
+            <span class="val">Écrire au camion</span>
+          </div>
+        </a>
+
+        <a href="mailto:bonjour@lamarmaille.fr" class="reveal">
+          <div class="ico mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1 0 2 1 2 2v12c0 1-1 2-2 2H4c-1 0-2-1-2-2V6c0-1 1-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          </div>
+          <div>
+            <span class="lbl">Mail</span>
+            <span class="val">bonjour@lamarmaille.fr</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <h3>Réserver le camion.</h3>
+      <p class="sub">Pour une privatisation, un devis ou simplement une question.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="nom">Prénom &amp; nom <span class="req">*</span></label>
+          <input type="text" id="nom" name="nom" required>
+        </div>
+        <div class="field">
+          <label for="tel">Téléphone <span class="req">*</span></label>
+          <input type="tel" id="tel" name="tel" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="type">Type d'événement</label>
+          <select id="type" name="type">
+            <option>Privatisation mariage</option>
+            <option>Séminaire / entreprise</option>
+            <option>Anniversaire / famille</option>
+            <option>Fête de village / asso</option>
+            <option>Autre / je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="couverts">Nombre de couverts</label>
+          <input type="number" id="couverts" name="couverts" min="1" placeholder="Ex. 80">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="date">Date envisagée</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div class="field">
+          <label for="lieu">Commune</label>
+          <input type="text" id="lieu" name="lieu" placeholder="Ex. Ancenis">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="msg">Votre message</label>
+        <textarea id="msg" name="msg" placeholder="Dites-nous l'ambiance, les contraintes, vos envies — on vous répond dans la journée."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Envoyer la demande →</button>
+      <div class="form-msg" id="formMsg"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-top">
+      <div class="foot-brand">
+        <div class="logo-mark"><span class="dot"></span>La Marmaille</div>
+        <p>Cuisine de bistrot itinérante, au feu de bois. Basée à Riaillé, sur les routes de Loire-Atlantique depuis 2021.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Sur la route</h4>
+        <a href="#planning">Planning</a>
+        <a href="#carte">L'ardoise</a>
+        <a href="#evenements">Privatisation</a>
+        <a href="#galerie">Galerie</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+33782143609">07 82 14 36 09</a>
+        <a href="mailto:bonjour@lamarmaille.fr">bonjour@lamarmaille.fr</a>
+        <p>Riaillé · Loire-Atlantique</p>
+      </div>
+      <div class="foot-col">
+        <h4>Suivre</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Newsletter mensuelle</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 La Marmaille — SIRET 902 481 627 00018</span>
+      <span>Site dessiné à Riaillé · entre deux fournées</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+// === Page de chargement premium ===
+(() => {
+  const loader = document.getElementById('siteLoader');
+  const bar = document.getElementById('loaderProgress');
+  const percent = document.getElementById('loaderPercent');
+  const todayLabel = document.getElementById('loaderToday');
+  const signCity = document.getElementById('loaderSignCity');
+  if (!loader || !bar || !percent) return;
+
+  const DAY_ORDER = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
+  const normalize = (value) => (value || '')
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+
+  const cleanText = (value) => (value || '').replace(/\s+/g, ' ').trim();
+
+  const splitLinesFromHtml = (el) => {
+    if (!el) return [];
+    return el.innerHTML
+      .split(/<br\s*\/?\s*>/i)
+      .map((part) => cleanText(part.replace(/<[^>]*>/g, '')))
+      .filter(Boolean);
+  };
+
+  const buildStopFromPlanningCard = (dayEl) => {
+    const day = cleanText(dayEl.querySelector('.day-name')?.textContent);
+    const meta = cleanText(dayEl.querySelector('.day-meta')?.textContent);
+    const when = cleanText(dayEl.querySelector('.when')?.textContent);
+    const placeLines = splitLinesFromHtml(dayEl.querySelector('.where'));
+    const city = placeLines[0] || '';
+    const detail = placeLines.slice(1).join(' · ');
+    const searchText = normalize([day, meta, when, city, detail].join(' '));
+
+    // Important : le loader ne doit pas inventer une ville.
+    // Il lit le tableau, puis écarte les jours explicitement fermés / sans service.
+    const isServiceClosed =
+      dayEl.classList.contains('closed') ||
+      searchText.includes('ferme') ||
+      searchText.includes('pas de service') ||
+      searchText.includes('repos') ||
+      searchText.includes('on dort') ||
+      when === '—' ||
+      when === '-';
+
+    return { day, meta, when, city, detail, isServiceClosed };
+  };
+
+  const weeklyStops = Array.from(document.querySelectorAll('#planning .calendar .day'))
+    .map(buildStopFromPlanningCard)
+    .filter((stop) => stop.day && DAY_ORDER.includes(stop.day));
+
+  const getStopByIndex = (index) => weeklyStops.find((stop) => stop.day === DAY_ORDER[index]);
+
+  const findNextService = (fromIndex) => {
+    for (let offset = 1; offset <= DAY_ORDER.length; offset += 1) {
+      const candidateIndex = (fromIndex + offset) % DAY_ORDER.length;
+      const candidate = getStopByIndex(candidateIndex);
+      if (candidate && !candidate.isServiceClosed && candidate.city) return candidate;
+    }
+    return null;
+  };
+
+  const todayIndex = new Date().getDay();
+  const currentStop = getStopByIndex(todayIndex);
+  const nextService = findNextService(todayIndex);
+
+  const makeServiceText = (stop) => {
+    if (!stop) return '';
+    const time = stop.when && stop.when !== '—' ? ` <span class="loader-city-time">${stop.when}</span>` : '';
+    return `Aujourd'hui, <strong>${stop.day}</strong>, nous sommes à <strong class="loader-city-highlight">${stop.city}</strong>${time}`;
+  };
+
+  const makeClosedText = (stop, next) => {
+    const day = stop?.day || 'aujourd\'hui';
+    if (!next) return `Aujourd'hui, <strong>${day}</strong>, nous sommes fermés.`;
+    return `Aujourd'hui, <strong>${day}</strong>, nous sommes fermés. Nous serons de retour <strong>${next.day}</strong> à <strong class="loader-city-highlight">${next.city}</strong>`;
+  };
+
+  if (todayLabel && currentStop) {
+    todayLabel.innerHTML = currentStop.isServiceClosed
+      ? makeClosedText(currentStop, nextService)
+      : makeServiceText(currentStop);
+  }
+
+  const fitLoaderSignText = (el) => {
+    if (!el) return;
+
+    const fit = () => {
+      el.style.fontSize = '';
+      el.style.letterSpacing = '';
+      el.style.transform = '';
+
+      const minSize = 9;
+      let size = parseFloat(getComputedStyle(el).fontSize) || 14;
+
+      while (el.scrollWidth > el.clientWidth && size > minSize) {
+        size -= 0.5;
+        el.style.fontSize = `${size}px`;
+      }
+
+      if (el.scrollWidth > el.clientWidth) {
+        el.style.letterSpacing = '0';
+        el.style.transform = 'scaleX(.84)';
+      } else if ((el.textContent || '').length >= 11) {
+        el.style.transform = 'scaleX(.9)';
+      }
+    };
+
+    requestAnimationFrame(fit);
+    if (document.fonts?.ready) document.fonts.ready.then(fit).catch(() => {});
+  };
+
+  if (signCity) {
+    const signStop = currentStop && !currentStop.isServiceClosed ? currentStop : nextService;
+    signCity.textContent = (signStop?.city || 'À BIENTÔT').toUpperCase();
+    fitLoaderSignText(signCity);
+  }
+
+  const heroLocation = document.querySelector('.hero-live-location');
+  const heroKicker = heroLocation?.querySelector('.hero-location-kicker');
+  const heroCity = heroLocation?.querySelector('.hero-location-city');
+  const heroNote = heroLocation?.querySelector('.hero-location-note');
+
+  if (heroLocation && currentStop) {
+    if (currentStop.isServiceClosed) {
+      if (heroKicker) heroKicker.textContent = 'Camion fermé aujourd\'hui';
+      if (heroCity) heroCity.textContent = nextService?.city || 'À bientôt';
+      if (heroNote) heroNote.textContent = nextService ? `retour ${nextService.day.toLowerCase()}` : 'on revient vite';
+      heroLocation.setAttribute('aria-label', nextService ? `Aujourd'hui fermé, retour ${nextService.day} à ${nextService.city}` : `Aujourd'hui fermé`);
+    } else {
+      if (heroKicker) heroKicker.textContent = 'Camion en service aujourd\'hui';
+      if (heroCity) heroCity.textContent = currentStop.city;
+      if (heroNote) heroNote.textContent = currentStop.when && currentStop.when !== '—' ? currentStop.when : 'on cuisine ici';
+      heroLocation.setAttribute('aria-label', `Position actuelle du food truck : ${currentStop.city}`);
+    }
+  }
+
+  // La progression 0 → 100% dure exactement 4 secondes.
+  // À 100%, on lance immédiatement la transition vers le site.
+  const duration = 4000;
+  const startedAt = performance.now();
+  let finished = false;
+  let lastPercent = -1;
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const paint = (value) => {
+    const rounded = Math.min(100, Math.max(0, Math.floor(value)));
+    if (rounded === lastPercent) return;
+
+    lastPercent = rounded;
+    bar.style.width = rounded + '%';
+    percent.textContent = rounded + '%';
+  };
+
+  const complete = () => {
+    if (finished) return;
+    finished = true;
+    paint(100);
+    loader.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-loading');
+  };
+
+  const tick = (now) => {
+    const elapsed = now - startedAt;
+    const progress = Math.min(elapsed / duration, 1);
+    paint(easeOutCubic(progress) * 100);
+
+    if (progress >= 1) {
+      complete();
+      return;
+    }
+    requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(tick);
+
+  window.addEventListener('load', () => {
+    const elapsed = performance.now() - startedAt;
+    if (elapsed >= duration) complete();
+  }, { once:true });
+})();
+
+// === NAV scroll state ===
+const nav = document.getElementById('nav');
+let lastScrollY = 0;
+
+function getReadableBackgroundColorAt(x, y) {
+  const stack = document.elementsFromPoint(x, y);
+  const candidate = stack.find(el => el && nav && !nav.contains(el) && !el.closest('.site-loader'));
+  let el = candidate;
+
+  while (el && el !== document.documentElement) {
+    const bg = getComputedStyle(el).backgroundColor;
+    if (bg && bg !== 'transparent' && !bg.startsWith('rgba(0, 0, 0, 0)')) return bg;
+    el = el.parentElement;
+  }
+
+  return getComputedStyle(document.body).backgroundColor;
+}
+
+function isVeryLightColor(color) {
+  const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (!match) return false;
+  const [, r, g, b] = match.map(Number);
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance > .72;
+}
+
+function updateNavTone() {
+  if (!nav) return;
+
+  const navRect = nav.getBoundingClientRect();
+  const sampleY = Math.max(12, Math.min(window.innerHeight - 12, navRect.top + navRect.height * .62));
+  const sampleXs = [
+    navRect.left + Math.min(120, navRect.width * .18),
+    navRect.left + navRect.width * .5,
+    navRect.right - Math.min(120, navRect.width * .18)
+  ].map(x => Math.max(12, Math.min(window.innerWidth - 12, x)));
+
+  const lightSamples = sampleXs
+    .map(x => getReadableBackgroundColorAt(x, sampleY))
+    .filter(bg => isVeryLightColor(bg)).length;
+
+  const isOnLight = lightSamples >= 2;
+  nav.classList.toggle('nav-on-light', isOnLight);
+  nav.classList.toggle('nav-logo-dark', isOnLight);
+}
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 60);
+  updateNavTone();
+  lastScrollY = y;
+});
+window.addEventListener('resize', updateNavTone);
+window.addEventListener('load', updateNavTone);
+setTimeout(updateNavTone, 4500);
+
+// === Mobile menu ===
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('[data-mm]').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+
+
+// === Premium navbar food-truck section indicator ===
+const navTruck = document.getElementById('navTruck');
+const desktopNavLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+const mobileNavLinks = [...document.querySelectorAll('.mobile-menu a[href^="#"]')];
+const navSectionIds = [...new Set(
+  desktopNavLinks
+    .map(a => a.getAttribute('href'))
+    .filter(h => h && h.length > 1)
+)];
+const navSections = navSectionIds.map(id => document.querySelector(id)).filter(Boolean);
+let activeNavId = null;
+let truckMoveTimer = null;
+let truckLastX = 0;
+let truckRaf = null;
+let truckLastScrollY = window.scrollY;
+let scrollVelocity = 0;
+
+function setActiveNavigation(id) {
+  if (!id || activeNavId === id) return;
+  activeNavId = id;
+  [...desktopNavLinks, ...mobileNavLinks].forEach(link => {
+    const isActive = link.getAttribute('href') === '#' + id;
+    link.classList.toggle('is-active', isActive);
+    if (isActive) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+  moveNavTruck();
+}
+
+function getActiveLinkProgress(section) {
+  if (!section) return 0;
+  const nextSection = navSections[navSections.indexOf(section) + 1];
+  const start = section.offsetTop;
+  const end = nextSection ? nextSection.offsetTop : document.documentElement.scrollHeight - window.innerHeight;
+  return Math.max(0, Math.min(1, (window.scrollY + window.innerHeight * .38 - start) / Math.max(1, end - start)));
+}
+
+function moveNavTruck() {
+  if (!navTruck || !activeNavId) return;
+  cancelAnimationFrame(truckRaf);
+  truckRaf = requestAnimationFrame(() => {
+    const activeLink = desktopNavLinks.find(link => link.getAttribute('href') === '#' + activeNavId);
+    if (!activeLink || getComputedStyle(activeLink.closest('.nav-links')).display === 'none') {
+      nav.style.setProperty('--truck-opacity', '0');
+      return;
+    }
+
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const currentSection = document.getElementById(activeNavId);
+    const progress = getActiveLinkProgress(currentSection);
+    const laneOffset = (progress - .5) * Math.min(14, linkRect.width * .22);
+    const truckWidth = navTruck.offsetWidth || 74;
+    const targetX = Math.round(linkRect.left + linkRect.width / 2 - navRect.left - truckWidth / 2 + laneOffset);
+    const distance = targetX - truckLastX;
+    const direction = scrollVelocity < 0 ? -1 : 1;
+    const tilt = Math.max(-6, Math.min(6, distance * .075 + scrollVelocity * .018));
+    const bounce = Math.min(6, Math.abs(distance) * .026 + Math.abs(scrollVelocity) * .012);
+
+    nav.style.setProperty('--truck-dir', direction);
+    nav.style.setProperty('--truck-tilt', tilt.toFixed(2) + 'deg');
+    nav.style.setProperty('--truck-y', '-' + bounce.toFixed(2) + 'px');
+    nav.style.setProperty('--truck-x', targetX + 'px');
+    nav.style.setProperty('--truck-opacity', '1');
+
+    navTruck.classList.add('is-moving');
+    navTruck.classList.remove('is-settling');
+    clearTimeout(truckMoveTimer);
+    truckMoveTimer = setTimeout(() => {
+      navTruck.classList.remove('is-moving');
+      navTruck.classList.add('is-settling');
+      nav.style.setProperty('--truck-tilt', '0deg');
+      nav.style.setProperty('--truck-y', '0px');
+    }, 640);
+    truckLastX = targetX;
+  });
+}
+
+function detectActiveSection() {
+  if (!navSections.length) return;
+  const y = window.scrollY;
+  scrollVelocity = y - truckLastScrollY;
+  truckLastScrollY = y;
+  const probe = y + window.innerHeight * .38;
+  let current = navSections[0];
+  navSections.forEach(section => {
+    if (section.offsetTop <= probe) current = section;
+  });
+  setActiveNavigation(current.id);
+  moveNavTruck();
+}
+
+window.addEventListener('scroll', detectActiveSection, { passive: true });
+window.addEventListener('resize', () => requestAnimationFrame(() => { detectActiveSection(); moveNavTruck(); }));
+window.addEventListener('load', () => requestAnimationFrame(detectActiveSection));
+detectActiveSection();
+
+// === Reveal on scroll ===
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 70);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// === FAQ accordion ===
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(other => {
+      if (other !== item) {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = '0';
+        other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      }
+    });
+    if (open) {
+      item.classList.remove('open');
+      a.style.maxHeight = '0';
+      q.setAttribute('aria-expanded', 'false');
+    } else {
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollWidth ? a.scrollHeight + 'px' : '500px';
+      a.style.maxHeight = a.querySelector('.faq-a-inner').offsetHeight + 28 + 'px';
+      q.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// === Form ===
+const form = document.getElementById('contactForm');
+const formMsg = document.getElementById('formMsg');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  formMsg.classList.remove('show', 'ok', 'err');
+
+  const nom = form.nom.value.trim();
+  const tel = form.tel.value.trim();
+  const email = form.email.value.trim();
+
+  if (!nom || !tel || !email) {
+    formMsg.textContent = 'Merci de remplir au minimum votre nom, téléphone et email.';
+    formMsg.classList.add('show', 'err');
+    return;
+  }
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!emailOk) {
+    formMsg.textContent = 'L\'email saisi ne semble pas valide.';
+    formMsg.classList.add('show', 'err');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Envoi en cours…';
+
+  // Simulation (en prod : fetch vers votre endpoint)
+  setTimeout(() => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Envoyer la demande →';
+    formMsg.textContent = 'Merci ' + nom.split(' ')[0] + ' — votre demande est partie. On vous rappelle dans la journée.';
+    formMsg.classList.add('show', 'ok');
+    form.reset();
+    setTimeout(() => formMsg.classList.remove('show'), 8000);
+  }, 1200);
+});
+
+// === Smooth gallery cursor parallax ===
+const gallery = document.getElementById('gallery');
+let isDown = false, startX, scrollLeft;
+gallery.addEventListener('mousedown', (e) => {
+  isDown = true; gallery.style.cursor = 'grabbing';
+  startX = e.pageX - gallery.offsetLeft;
+  scrollLeft = gallery.scrollLeft;
+});
+gallery.addEventListener('mouseleave', () => { isDown = false; gallery.style.cursor = 'grab' });
+gallery.addEventListener('mouseup', () => { isDown = false; gallery.style.cursor = 'grab' });
+gallery.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - gallery.offsetLeft;
+  const walk = (x - startX) * 1.5;
+  gallery.scrollLeft = scrollLeft - walk;
+});
+gallery.style.cursor = 'grab';
+
+// === Hero subtle parallax on photo ===
+const heroPhoto = document.querySelector('.hero-photo');
+if (heroPhoto && window.matchMedia('(min-width: 961px)').matches) {
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 14;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    heroPhoto.style.transform = `rotate(2.5deg) translate(${x}px, ${y}px)`;
+  });
+}
+</script>
+</body>
+</html>
