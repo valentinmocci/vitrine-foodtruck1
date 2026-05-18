@@ -312,7 +312,7 @@ nav.nav-logo-dark .logo-mark .dot{
 .histoire-title{
   grid-column:2/8;
   font-family:'Fraunces',serif;font-weight:300;
-  font-size:clamp(40px,5.4vw,86px);line-height:.95;
+  font-size:clamp(40px,5.4vw,86px);line-height:1.02;
   letter-spacing:-.025em;
   margin:24px 0 0;
   color:var(--moss-deep);
@@ -385,7 +385,7 @@ nav.nav-logo-dark .logo-mark .dot{
   font-family:'Fraunces',serif;font-weight:300;font-size:clamp(48px,7vw,110px);
   line-height:.92;letter-spacing:-.03em;margin-top:18px;
 }
-.ardoise-head h2 em{font-style:italic;color:var(--ochre)}
+.ardoise-head h2 em{font-style:italic;color:var(--ochre);display:inline-block;margin-left:0.06em}
 .ardoise-head .head-note{
   font-family:'Fraunces',serif;font-style:italic;font-weight:400;
   font-size:17px;line-height:1.6;opacity:.8;max-width:380px;
@@ -487,6 +487,8 @@ nav.nav-logo-dark .logo-mark .dot{
   display:grid;grid-template-columns:repeat(7,1fr);
   border-top:2px solid var(--ink);
   border-left:2px solid var(--ink);
+  border-right:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
   background:var(--ink);gap:1px;
 }
 .day{
@@ -649,6 +651,22 @@ nav.nav-logo-dark .logo-mark .dot{
   opacity:0;transform:translateY(6px);transition:.3s;
 }
 .gallery-strip .gimg:hover::after{opacity:1;transform:translateY(0)}
+
+/* Edge arrows for horizontal gallery (leftmost / rightmost images) */
+.gallery-strip .gimg:first-child::before,
+.gallery-strip .gimg:last-child::after{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:32px;
+  color:rgba(255,255,255,0.9);
+  opacity:.78;
+  z-index:5;
+  pointer-events:none;
+  text-shadow:0 6px 18px rgba(0,0,0,.45);
+}
+.gallery-strip .gimg:first-child::before{content:"⮜";left:12px}
+.gallery-strip .gimg:last-child::after{content:"➤";right:12px}
 
 .gallery-meta{
   max-width:1280px;margin:0 auto;padding:24px 32px 60px;
@@ -2599,7 +2617,6 @@ body.is-loading{overflow:hidden;touch-action:none}
   </div>
 
   <div class="gallery-meta">
-    <span>← Faites défiler horizontalement</span>
     <span>Photos · Hadrien Cailloux pour La Marmaille</span>
   </div>
 </section>
